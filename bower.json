@@ -1,0 +1,19 @@
+{
+  "name": "timetight",
+  "version": "0.0.0",
+  "authors": [
+    "goncalonsp <goncalonsp@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fullcalendar": "~1.6.4"
+  }
+}
