@@ -51,3 +51,11 @@ html, body {
 #right-menu, #left-menu {
     overflow: auto;
 }
+
+.menu-header {
+    background: #0d77b6;
+}
+
+.add-btn {
+    padding-top: 13px;
+}
