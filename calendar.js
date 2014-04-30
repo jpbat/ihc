@@ -13,3 +13,15 @@ $(document).ready(function() {
     $('.toggle-menu').jPushMenu();
 
 });
+
+function addResource(name) {
+	$('<a/>', {
+		text: name
+	}).appendTo('#right-menu');
+}
+
+function addEvent(name) {
+	$('<a/>', {
+		text: name
+	}).appendTo('#left-menu');
+}
