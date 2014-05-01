@@ -21,7 +21,8 @@ function addResource(name) {
 }
 
 function addEvent(name) {
-	$('<a/>', {
-		text: name
-	}).appendTo('#left-menu');
+    $('#add-event-modal').modal('show');
+	// $('<a/>', {
+	// 	text: name
+	// }).appendTo('#left-menu');
 }

@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script>
+				var nextEventId = 0; 
+				var nextResourceId = 0;
+		</script>
 		<title>TimeTight</title>
 		<link rel="shortcut icon" type="image/png" href="./favicon.png"/>
 		<link rel="stylesheet" type="text/css" href="./bootstrap-3.1.1-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="./bower_components/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
 		<link rel="stylesheet" type="text/css" href="./bower_components/fullcalendar/fullcalendar.css" />
-		<link rel="stylesheet" type="text/css" href="./pepper-grinder/jquery-ui-1.10.4.custom.css" />
+		<link rel="stylesheet" type="text/css" href="./jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
 		<link rel="stylesheet" type="text/css" href="./jPushMenu/css/jPushMenu.css" />
 		<link rel="stylesheet" type="text/css" href="./custom.css" />
 	</head>
@@ -47,7 +52,7 @@
 							<h3>Events</h3>
 						</div>
 						<div class="col-md-4 add-btn">
-							<button class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span></button>
+							<button class="btn btn-default" onclick="addEvent()"><span class="glyphicon glyphicon-plus-sign"></span></button>
 						</div>
 					</div>
 					<div class="row menu-header" id="menu-search">
@@ -88,14 +93,63 @@
 					<a href="./#">Rutabaga</a>
 				</nav>
 			</div>
+
+			<div class="modal fade" id="add-event-modal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">New Event</h4>
+						</div>
+						<div class="modal-body">
+							<div class="input-group">
+								<span class="input-group-addon">Name</span>
+								<input type="text" class="form-control" placeholder="">
+							</div>
+							<p>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">Start</span>
+										<input type="text" class="form-control" placeholder="">
+									</div>
+								</div>
+								<div class="col-md-offset-1 col-md-2"><!--
+									<input type="text" class="form-control" placeholder="">
+								</div>
+								<div class="col-md-1">:</div>
+								<div class="col-md-2">
+									<input type="text" class="form-control" placeholder="">-->
+									<div class="input-group bootstrap-timepicker">
+										<input id="timepicker1" type="text" class="form-control">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary">Save Event</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
 		</div>
+
+		
+
 
 		<!-- le javascript -->
 		<script type="text/javascript" src="./bower_components/jquery/jquery.js"></script>
 		<script type="text/javascript" src="./bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 		<script type="text/javascript" src="./bower_components/fullcalendar/fullcalendar.js"></script>
 		<script type="text/javascript" src="./jPushMenu/js/jPushMenu.js"></script>
 		<script type="text/javascript" src="./calendar.js"></script>
+		<script type="text/javascript">
+				$('#timepicker1').timepicker();
+		</script>
 	<!--
 		<script type="text/javascript">
 			$(function () {
