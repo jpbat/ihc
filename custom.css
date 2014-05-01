@@ -53,9 +53,13 @@ html, body {
 }
 
 .menu-header {
-    background: #0d77b6;
+    background: #bcbcbc;
 }
 
 .add-btn {
     padding-top: 13px;
+}
+
+#menu-search {
+    padding-bottom: 8px;
 }
