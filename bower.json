@@ -1,11 +1,11 @@
 {
   "name": "timetight",
   "version": "0.0.0",
+  "homepage": "https://github.com/jpbat/ihc",
   "authors": [
-    "goncalonsp <goncalonsp@gmail.com>"
+    "Pedro <pgcmarques@gmail.com>"
   ],
   "license": "MIT",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -14,7 +14,8 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-timepicker": "~0.2.6"
+    "eonasdan-bootstrap-datetimepicker": "~3.0.0",
+    "fullcalendar": "~1.6.4"
   },
-  "homepage": "https://github.com/jpbat/ihc"
+  "private": true
 }

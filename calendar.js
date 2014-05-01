@@ -26,3 +26,14 @@ function addEvent(name) {
 	// 	text: name
 	// }).appendTo('#left-menu');
 }
+function addResource(name) {
+    $('#add-resource-modal').modal('show');
+	// $('<a/>', {
+	// 	text: name
+	// }).appendTo('#left-menu');
+}
+$(function () {
+	$('#date-time-begin').datetimepicker();
+	$('#date-time-end').datetimepicker();
+});
+      
