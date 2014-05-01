@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "homepage": "https://github.com/jpbat/ihc",
   "authors": [
-    "Pedro <pgcmarques@gmail.com>"
+    "Pedro <pgcmarques@gmail.com>",
+    "Goncalonsp <goncalonsp@gmail.com>"
   ],
   "license": "MIT",
   "ignore": [
