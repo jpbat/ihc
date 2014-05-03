@@ -24,7 +24,7 @@ $(document).ready(function() {
 				end: new Date(y, m, d-2)
 			},
 			{
-				id: 999,
+				id: 5,
 				title: 'Repeating Event',
 				start: new Date(y, m, d-3, 16, 0),
 				allDay: false
@@ -116,22 +116,47 @@ $(function() {
 });
 
 function saveEvent() {
-	var start = $('#date-time-begin input').val();
-	var end = $('#date-time-end input').val();
+	var start = new Date($('#date-time-begin input').val());
+	var end = new Date($('#date-time-end input').val());
 	var name = $('#event-name').val();
 
 	console.log("start: " + start);
 	console.log("end: " + end);
 	console.log("name: " + name);
 
+	/* checking validity of stuff*/
+	if (start == undefined) {
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
+		console.log("Please fill in start date.")
+		return;
+	}
+	
+	if (end == undefined) {
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
+		console.log("Please fill in end date.")
+		return;
+	}
+
+	if (start > end) {
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
+		console.log("start date should be before end date.")
+		return;
+	}
+
+	if (name.length == 0) {
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
+		console.log("Please add a title to the event.")
+		return;
+	}
+
 	newEvent = {
+		id: nextEventId++,
 		title: name,
-		start: new Date(start),
-		end: new Date(end),
+		start: start,
+		end: end,
 		allDay: false
 	}
 
 	$('#calendar').fullCalendar('renderEvent', newEvent);
 	$('#add-event-modal').modal('hide');
 }
-
