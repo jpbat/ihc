@@ -49,7 +49,7 @@ html, body {
 }
 
 #right-menu, #left-menu {
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 .menu-header {

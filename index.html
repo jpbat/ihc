@@ -25,74 +25,89 @@
 		<div id="content">
 			<div class="container-fluid">
 				<div class="row outer-area">
-					<div class="col-md-offset-1 col-md-10 ">
+					<div class="col-md-offset-2 col-md-10 ">
 						<h1>TITLE</h1>
 					</div>
 				</div>
+				
 				<div class="row">
-					<nav class="col-md-1 toggle-menu menu-left push-body cl-full-tab outer-area">
-						<div class="">
-							<label class="rotate90">Events</label>
+					<!-- Left menu element-->
+						<div class="col-md-2">
+							<div id="left-menu">
+								<div class="row">
+									<div class="col-md-8">
+										<h3>Events</h3>
+									</div>
+									<div class="col-md-4 add-btn">
+										<button class="btn btn-default" onclick="addEvent()"><span class="glyphicon glyphicon-plus-sign"></span></button>
+									</div>
+								</div>
+							</div>
+
+							<div class="row" id="menu-event-search">
+								<div class="col-md-offset-2 col-md-8">
+									<div class="input-group input-group-sm ">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+										<input type="text" class="form-control" placeholder="Search...">
+									</div>
+								</div>
+							</div>
+							<div class="row" id="menu-event-list">
+								<div class="col-md-12">
+									<ul>
+									<li>Celery seakale</li>
+									<li>Dulse daikon</li>
+									<li>Zucchini garlic</li>
+									<li>Catsear azuki bean</li>
+									<li>Dandelion bunya</li>
+									<li>Rutabaga</li>
+									</ul>
+								</div>
+							</div>
 						</div>
-					</nav>
-					<div class="col-md-10">
-						<div id="calendar"></div>
-					</div>
+					
+					<!-- ISSUE: behind right menu -->
+					
+						<div class="col-md-8">
+							<div id="calendar"></div>
+						</div>
+					
+					<!--
 					<nav class="col-md-1 toggle-menu menu-right push-body cl-full-tab outer-area">
 						<div class="">
 							<label class="rotate-90">Resources</label>
 						</div>
-					</nav>
+					</nav>-->
+					
+						<!-- Right menu element-->
+						<div id="right-menu" class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right cbp-spmenu-open">
+							<div class="row menu-header">
+								<div class="col-md-8">
+									<h3>Resources</h3>
+								</div>
+								<div class="col-md-4 add-btn">
+									<button class="btn btn-default" onclick="addResource()"><span class="glyphicon glyphicon-plus-sign"></span></button>
+								</div>
+							</div>
+							<div class="row menu-header" id="menu-search">
+								<div class="input-group input-group-sm col-md-offset-2 col-md-8">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+									<input type="text" class="form-control" placeholder="Search...">
+								</div>
+							</div>
+							<a href="./#">Celery seakale</a>
+							<a href="./#">Dulse daikon</a>
+							<a href="./#">Zucchini garlic</a>
+							<a href="./#">Catsear azuki bean</a>
+							<a href="./#">Dandelion bunya</a>
+							<a href="./#">Rutabaga</a>
+						</div>
+				
 				</div>
-
-				<!-- Left menu element-->
-				<nav id="left-menu" class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left">
-					<div class="row menu-header">
-						<div class="col-md-8">
-							<h3>Events</h3>
-						</div>
-						<div class="col-md-4 add-btn">
-							<button class="btn btn-default" onclick="addEvent()"><span class="glyphicon glyphicon-plus-sign"></span></button>
-						</div>
-					</div>
-					<div class="row menu-header" id="menu-search">
-						<div class="input-group input-group-sm col-md-offset-2 col-md-8">
-							<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-							<input type="text" class="form-control" placeholder="Search...">
-						</div>
-					</div>
-					<a href="./#">Celery seakale</a>
-					<a href="./#">Dulse daikon</a>
-					<a href="./#">Zucchini garlic</a>
-					<a href="./#">Catsear azuki bean</a>
-					<a href="./#">Dandelion bunya</a>
-					<a href="./#">Rutabaga</a>
-				</nav>
-
-				<!-- Right menu element-->
-				<nav id="right-menu" class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right">
-					<div class="row menu-header">
-						<div class="col-md-8">
-							<h3>Resources</h3>
-						</div>
-						<div class="col-md-4 add-btn">
-							<button class="btn btn-default" onclick="addResource()"><span class="glyphicon glyphicon-plus-sign"></span></button>
-						</div>
-					</div>
-					<div class="row menu-header" id="menu-search">
-						<div class="input-group input-group-sm col-md-offset-2 col-md-8">
-							<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-							<input type="text" class="form-control" placeholder="Search...">
-						</div>
-					</div>
-					<a href="./#">Celery seakale</a>
-					<a href="./#">Dulse daikon</a>
-					<a href="./#">Zucchini garlic</a>
-					<a href="./#">Catsear azuki bean</a>
-					<a href="./#">Dandelion bunya</a>
-					<a href="./#">Rutabaga</a>
-				</nav>
 			</div>
+
+				
+				
 
 			<div class="modal fade" id="add-event-modal">
 				<div class="modal-dialog">
@@ -221,5 +236,6 @@
 			}, 3000); 
 	
 	-->
+
 	</body>
 </html>
