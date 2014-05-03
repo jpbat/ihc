@@ -160,6 +160,12 @@ function saveEvent() {
 		allDay: false
 	}
 
+	/* clean all fields */
+	$('#date-time-begin input').val("");
+	$('#date-time-end input').val("");
+	$('#event-name').val("");
+
+	/* add the event and hide the modal */
 	$('#calendar').fullCalendar('renderEvent', newEvent);
 	$('#add-event-modal').modal('hide');
 }
