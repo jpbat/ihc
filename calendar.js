@@ -1,16 +1,69 @@
 $(document).ready(function() {
 
-    // page is now ready, initialize the calendar...
+	// page is now ready, initialize the calendar...
 
-    $('#calendar').fullCalendar({
-        // put your options and callbacks here
-        theme: true,
-        aspectRatio: 1.8
-    })
+	var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
 
-    $('#calendar').fullCalendar('changeView', 'agendaWeek' );
+	$('#calendar').fullCalendar({
+		// put your options and callbacks here
 
-    $('.toggle-menu').jPushMenu();
+		theme: true,
+		aspectRatio: 1.8,
+		editable: true,
+		events: [
+			{
+				title: 'All Day Event',
+				start: new Date(y, m, 1)
+			},
+			{
+				title: 'Long Event',
+				start: new Date(y, m, d-5),
+				end: new Date(y, m, d-2)
+			},
+			{
+				id: 999,
+				title: 'Repeating Event',
+				start: new Date(y, m, d-3, 16, 0),
+				allDay: false
+			},
+			{
+				id: 999,
+				title: 'Repeating Event',
+				start: new Date(y, m, d+4, 16, 0),
+				allDay: false
+			},
+			{
+				title: 'Meeting',
+				start: new Date(y, m, d, 10, 30),
+				allDay: false
+			},
+			{
+				title: 'Lunch',
+				start: new Date(y, m, d, 12, 0),
+				end: new Date(y, m, d, 14, 0),
+				allDay: false
+			},
+			{
+				title: 'Birthday Party',
+				start: new Date(y, m, d+1, 19, 0),
+				end: new Date(y, m, d+1, 22, 30),
+				allDay: false
+			},
+			{
+				title: 'Click for Google',
+				start: new Date(y, m, 28),
+				end: new Date(y, m, 29),
+				url: 'http://google.com/'
+			}
+		]
+	})
+
+	$('#calendar').fullCalendar('changeView', 'agendaWeek' );
+
+	$('.toggle-menu').jPushMenu();
 
 });
 
@@ -21,17 +74,19 @@ function addResource(name) {
 }
 
 function addEvent(name) {
-    $('#add-event-modal').modal('show');
+	$('#add-event-modal').modal('show');
 	// $('<a/>', {
 	// 	text: name
 	// }).appendTo('#left-menu');
 }
+
 function addResource(name) {
-    $('#add-resource-modal').modal('show');
+	$('#add-resource-modal').modal('show');
 	// $('<a/>', {
 	// 	text: name
 	// }).appendTo('#left-menu');
 }
+
 $(function () {
 	$('#date-time-begin').datetimepicker();
 	$('#date-time-end').datetimepicker();
@@ -58,5 +113,25 @@ $(function() {
         $( this ).removeClass( "ui-state-default" );
       }
     });
-  });
-      
+});
+
+function saveEvent() {
+	var start = $('#date-time-begin input').val();
+	var end = $('#date-time-end input').val();
+	var name = $('#event-name').val();
+
+	console.log("start: " + start);
+	console.log("end: " + end);
+	console.log("name: " + name);
+
+	newEvent = {
+		title: name,
+		start: new Date(start),
+		end: new Date(end),
+		allDay: false
+	}
+
+	$('#calendar').fullCalendar('renderEvent', newEvent);
+	$('#add-event-modal').modal('hide');
+}
+
