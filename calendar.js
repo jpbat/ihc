@@ -63,8 +63,6 @@ $(document).ready(function() {
 
 	$('#calendar').fullCalendar('changeView', 'agendaWeek' );
 
-	$('.toggle-menu').jPushMenu();
-
 });
 
 function addResource(name) {
@@ -93,7 +91,7 @@ $(function () {
 });
 
 $(function() {
-    $( "#menu-resources-list a" ).draggable({
+    $( "#menu-resources-list li" ).draggable({
       appendTo: "body",
       helper: "clone"
     });
@@ -103,7 +101,7 @@ $(function() {
       accept: ":not(.ui-sortable-helper)",
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<a></a>" ).text( ui.draggable.text() ).appendTo( this );
+        $( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",

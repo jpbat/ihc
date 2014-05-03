@@ -36,6 +36,12 @@ html, body {
 
 .menu-header {
     background: #bcbcbc;
+    position: absolute;
+    top: -70px;
+}
+.menu-content {
+    background: #fff;
+    margin-top: 25px;
 }
 
 .add-btn {
@@ -94,4 +100,13 @@ html, body {
   display: none;
   margin: 0px -5px 0px -5px;
   color: #ccc;
+}
+
+#menu-event-list, #menu-resource-list {
+  background: #fff;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
 }

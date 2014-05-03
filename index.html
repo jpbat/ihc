@@ -29,11 +29,13 @@
 					</div>
 				</div>
 				
+
+				<!-- Left menu element-->
 				<div class="row">
-					<!-- Left menu element-->
-						<div class="col-md-2">
-							<div id="left-menu" class="menu-header">
-								<div class="row menu-header " >
+					<div class="col-md-2">
+						<div id="left-menu">
+							<div class="menu-header">
+								<div class="row">
 									<div class="col-md-8">
 										<h3>Events</h3>
 									</div>
@@ -41,18 +43,18 @@
 										<button class="btn btn-default" onclick="addEvent()"><span class="glyphicon glyphicon-plus-sign"></span></button>
 									</div>
 								</div>
-							</div>
-
-							<div class="row menu-header" id="menu-event-search">
-								<div class="col-md-12">
-									<div class="input-group input-group-sm ">
-										<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-										<input type="text" class="form-control" placeholder="Search...">
+								<div class="row">
+									<div class="col-md-12" id="menu-search">
+										<div class="input-group input-group-sm ">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+											<input type="text" class="form-control" placeholder="Search...">
+										</div>
 									</div>
-									<p>
 								</div>
 							</div>
-							<div class="row" id="menu-event-list">
+
+						
+							<div class="row menu-content" id="menu-event-list">
 								<div class="col-md-12">
 									<ul>
 										<li>Celery seakale</li>
@@ -65,25 +67,17 @@
 								</div>
 							</div>
 						</div>
+					</div>
 					
-					<!-- ISSUE: behind right menu -->
-					
-						<div class="col-md-8">
-							<div id="calendar"></div>
-						</div>
-					
-					<!--
-					<nav class="col-md-1 toggle-menu menu-right push-body cl-full-tab outer-area">
-						<div class="">
-							<label class="rotate-90">Resources</label>
-						</div>
-					</nav>-->
-					
-					<!-- Left menu element-->
-						<div class="col-md-2">
-						<!-- Right menu element-->
-							<div id="right-menu">
-								<div class="row menu-header">
+					<div class="col-md-8">
+						<div id="calendar"></div>
+					</div>
+						
+					<!-- Right menu element-->
+					<div class="col-md-2">
+						<div id="right-menu">
+							<div class="menu-header">
+								<div class="row">
 									<div class="col-md-8">
 										<h3>Resources</h3>
 									</div>
@@ -91,20 +85,22 @@
 										<button class="btn btn-default" onclick="addResource()"><span class="glyphicon glyphicon-plus-sign"></span></button>
 									</div>
 								</div>
-								<div class="row menu-header" id="menu-search">
-									<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-12" id="menu-search">
 										<div class="input-group input-group-sm">
 											<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
 											<input type="text" class="form-control" placeholder="Search...">
 										</div>
 									</div>
 								</div>
-								<div class="row" id="menu-resources-list">
-									<div class="col-md-12">
-										<a href="./#">Licinio Roque</a>
-										<a href="./#">Sala G.5.2</a>
-										<a href="./#">Sala G.5.1</a>
-									</div>
+							</div>
+							<div class="row menu-content" id="menu-resources-list">
+								<div class="col-md-12">
+									<ul>
+										<li>Licinio Roque</li>
+										<li>Sala G.5.2</li>
+										<li>Sala G.5.1</li>
+									</ul>
 								</div>
 							</div>
 						</div>
