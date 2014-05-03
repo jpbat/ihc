@@ -161,11 +161,16 @@ function saveEvent() {
 	}
 
 	/* clean all fields */
-	$('#date-time-begin input').val("");
-	$('#date-time-end input').val("");
-	$('#event-name').val("");
+	clearFields();
 
 	/* add the event and hide the modal */
 	$('#calendar').fullCalendar('renderEvent', newEvent);
 	$('#add-event-modal').modal('hide');
+}
+
+function clearFields() {
+	$("#new-event-errors").empty();
+	$('#date-time-begin input').val("");
+	$('#date-time-end input').val("");
+	$('#event-name').val("");
 }
