@@ -11,7 +11,7 @@ $(document).ready(function() {
 		// put your options and callbacks here
 
 		theme: true,
-		aspectRatio: 1.8,
+		aspectRatio: 1.1,
 		editable: true,
 		events: [
 			{
@@ -58,13 +58,13 @@ $(document).ready(function() {
 				end: new Date(y, m, 29),
 				url: 'http://google.com/'
 			}
-		]
+		],
+		eventClick: function(event) {
+			editEvent(event);
+		}
 	})
 
 	$('#calendar').fullCalendar('changeView', 'agendaWeek' );
-
-	$('.toggle-menu').jPushMenu();
-
 });
 
 function addResource(name) {
@@ -90,6 +90,8 @@ function addResource(name) {
 $(function () {
 	$('#date-time-begin').datetimepicker();
 	$('#date-time-end').datetimepicker();
+	$('#edit-time-begin').datetimepicker();
+	$('#edit-time-end').datetimepicker();
 });
 
 $(function() {
@@ -140,7 +142,7 @@ function saveEvent() {
 		return;
 	}
 
-	if (start > end) {
+	if (new Date(start) > new Date(end)) {
 		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
 		console.log("start date should be before end date.")
 		return;
@@ -173,4 +175,54 @@ function clearFields() {
 	$('#date-time-begin input').val("");
 	$('#date-time-end input').val("");
 	$('#event-name').val("");
+}
+
+function editEvent(ev) {
+	console.log(ev);
+	edited = ev;
+	$('#edit-event-title').html(event.title);
+	$('#edit-event-start').val(event.start);
+	$('#edit-event-end').val(event.end);
+	$('#event-id').val(event.id);
+	$('#edit-event-modal').modal('show');
+}
+
+function saveEditedEvent() {
+
+	$("#edit-event-errors").empty();
+
+	var start = $('#edit-time-begin input').val();
+	var end = $('#edit-time-end input').val();
+
+	console.log("start: " + start);
+	console.log("end: " + end);
+
+	/* checking validity of stuff*/
+	if (start.length == 0) {
+		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
+		console.log("Please fill in start date.")
+		return;
+	}
+	
+	if (end.length == 0) {
+		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
+		console.log("Please fill in end date.")
+		return;
+	}
+
+	if (new Date(start) > new Date(end)) {
+		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
+		console.log("start date should be before end date.")
+		return;
+	}
+
+	edited.start = new Date(start);
+	edited.end = new Date(end);
+
+	/* clean all fields */
+	clearFields();
+
+	/* add the event and hide the modal */
+	$('#calendar').fullCalendar('updateEvent', edited);
+	$('#edit-event-modal').modal('hide');
 }

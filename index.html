@@ -4,11 +4,12 @@
 		<script>
 				var nextEventId = 0; 
 				var nextResourceId = 0;
+				var edited = undefined;
 		</script>
 		<title>TimeTight</title>
 		<link rel="shortcut icon" type="image/png" href="./favicon.png"/>
 		<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css" />
-  		<link rel="stylesheet" href="./bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="./bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 		<link rel="stylesheet" type="text/css" href="./bower_components/fullcalendar/fullcalendar.css" />
 		<link rel="stylesheet" type="text/css" href="./jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
 		<link rel="stylesheet" type="text/css" href="./custom.css" />
@@ -29,7 +30,7 @@
 					</div>
 				</div>
 				
-				<div class="row">
+				<div class="row" id="calendar-row">
 					<!-- Left menu element-->
 						<div class="col-md-2">
 							<div id="left-menu" class="menu-header">
@@ -130,25 +131,25 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
-						                <div class='input-group date' id='date-time-begin'>
-						                    <span class="input-group-addon">Begin</span>
-						                    <input type='text' class="form-control" />
-						                    <span class="input-group-addon">
-						                    	<span class="glyphicon glyphicon-calendar"></span>
-						                    </span>
-						                </div>
-						            </div>
+										<div class='input-group date' id='date-time-begin'>
+											<span class="input-group-addon">Begin</span>
+											<input type='text' class="form-control" />
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-						                <div class='input-group date' id='date-time-end'>
-						                    <span class="input-group-addon">End</span>
-						                    <input type='text' class="form-control" />
-						                    <span class="input-group-addon">
-						                    	<span class="glyphicon glyphicon-calendar"></span>
-						                    </span>
-						                </div>
-						            </div>
+										<div class='input-group date' id='date-time-end'>
+											<span class="input-group-addon">End</span>
+											<input type='text' class="form-control" />
+											<span class="input-group-addon">
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="row">
@@ -234,6 +235,72 @@
 				</div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
 		</div>
+
+		<!-- edit event -->
+		<div class="modal fade" id="edit-event-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 id="edit-event-title" class="modal-title"></h4>
+					</div>
+					<div class="modal-body">
+						<div id="edit-event-errors" class="bs-example bs-example-bg-classes">
+						</div>
+						<input id="event-id" type="hidden"/>
+						<p>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class='input-group date' id='edit-time-begin'>
+										<span class="input-group-addon">Begin</span>
+										<input id="edit-event-start" type='text' class="form-control" />
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class='input-group date' id='edit-time-end'>
+										<span class="input-group-addon">End</span>
+										<input id="edit-event-end" type='text' class="form-control" />
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">Resources</div>
+									<div class="panel-body" id="new-event-resources">
+										<div class="placeholder">Drop resources here...</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">Incompatible Events</div>
+									<div class="panel-body" id="new-event-incompatible-events">
+										<div class="placeholder">Drop incompatible Events here...</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearFields()">Cancel</button>
+						<button type="button" class="btn btn-primary" onclick="saveEditedEvent()">Save Event</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
 		<!-- le javascript -->
 		<script type="text/javascript" src="./bower_components/jquery/jquery.min.js"></script>

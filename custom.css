@@ -7,7 +7,6 @@ html, body {
     background: #ddd;
 }
 
-
 #splash {
     height: 100%;
     background: black;
@@ -27,7 +26,7 @@ html, body {
 }
 
 #content {
-    background: #ddd;
+  background: #ddd;
 }
 
 #right-menu, #left-menu {
