@@ -116,8 +116,11 @@ $(function() {
 });
 
 function saveEvent() {
-	var start = new Date($('#date-time-begin input').val());
-	var end = new Date($('#date-time-end input').val());
+
+	$("#new-event-errors").empty();
+
+	var start = $('#date-time-begin input').val();
+	var end = $('#date-time-end input').val();
 	var name = $('#event-name').val();
 
 	console.log("start: " + start);
@@ -125,13 +128,13 @@ function saveEvent() {
 	console.log("name: " + name);
 
 	/* checking validity of stuff*/
-	if (start == undefined) {
+	if (start.length == 0) {
 		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
 		console.log("Please fill in start date.")
 		return;
 	}
 	
-	if (end == undefined) {
+	if (end.length == 0) {
 		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
 		console.log("Please fill in end date.")
 		return;
@@ -152,8 +155,8 @@ function saveEvent() {
 	newEvent = {
 		id: nextEventId++,
 		title: name,
-		start: start,
-		end: end,
+		start: new Date(start),
+		end: new Date(end),
 		allDay: false
 	}
 
