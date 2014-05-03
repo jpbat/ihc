@@ -1,30 +1,12 @@
 html, body {
     height:100%;
-}
-
-.cl-full-tab {
-	height: 637px;
+    background: #ddd;
 }
 
 .outer-area {
     background: #ddd;
 }
 
-.rotate90 {
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-}
-
-.rotate-90 {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
 
 #splash {
     height: 100%;
