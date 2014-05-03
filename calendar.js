@@ -180,10 +180,10 @@ function clearFields() {
 function editEvent(ev) {
 	console.log(ev);
 	edited = ev;
-	$('#edit-event-title').html(event.title);
-	$('#edit-event-start').val(event.start);
-	$('#edit-event-end').val(event.end);
-	$('#event-id').val(event.id);
+	$('#edit-event-title').html(ev.title);
+	$('#edit-event-start').val(ev.start);
+	$('#edit-event-end').val(ev.end);
+	$('#event-id').val(ev.id);
 	$('#edit-event-modal').modal('show');
 }
 
