@@ -37,10 +37,17 @@ html, body {
     background: #bcbcbc;
     position: absolute;
     top: -70px;
+    width: 100%;
+    left: 0px;
+}
+.menu-header-item {
+padding-left: 15px;
+padding-right: 15px;
 }
 .menu-content {
     background: #fff;
     margin-top: 25px;
+    min-height: 400px;
 }
 
 .add-btn {
