@@ -93,7 +93,7 @@ $(function () {
 });
 
 $(function() {
-    $( "#resources-list a" ).draggable({
+    $( "#menu-resources-list a" ).draggable({
       appendTo: "body",
       helper: "clone"
     });
