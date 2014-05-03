@@ -24,7 +24,7 @@ $(document).ready(function() {
 				end: new Date(y, m, d-2)
 			},
 			{
-				id: 999,
+				id: 5,
 				title: 'Repeating Event',
 				start: new Date(y, m, d-3, 16, 0),
 				allDay: false
@@ -92,7 +92,33 @@ $(function () {
 	$('#date-time-end').datetimepicker();
 });
 
+$(function() {
+    $( "#resources-list a" ).draggable({
+      appendTo: "body",
+      helper: "clone"
+    });
+    $( "#new-event-resources" ).droppable({
+      activeClass: "ui-state-default",
+      hoverClass: "ui-state-hover",
+      accept: ":not(.ui-sortable-helper)",
+      drop: function( event, ui ) {
+        $( this ).find( ".placeholder" ).remove();
+        $( "<a></a>" ).text( ui.draggable.text() ).appendTo( this );
+      }
+    }).sortable({
+      items: "li:not(.placeholder)",
+      sort: function() {
+        // gets added unintentionally by droppable interacting with sortable
+        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+        $( this ).removeClass( "ui-state-default" );
+      }
+    });
+});
+
 function saveEvent() {
+
+	$("#new-event-errors").empty();
+
 	var start = $('#date-time-begin input').val();
 	var end = $('#date-time-end input').val();
 	var name = $('#event-name').val();
@@ -101,13 +127,50 @@ function saveEvent() {
 	console.log("end: " + end);
 	console.log("name: " + name);
 
+	/* checking validity of stuff*/
+	if (start.length == 0) {
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
+		console.log("Please fill in start date.")
+		return;
+	}
+	
+	if (end.length == 0) {
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
+		console.log("Please fill in end date.")
+		return;
+	}
+
+	if (start > end) {
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
+		console.log("start date should be before end date.")
+		return;
+	}
+
+	if (name.length == 0) {
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
+		console.log("Please add a title to the event.")
+		return;
+	}
+
 	newEvent = {
+		id: nextEventId++,
 		title: name,
 		start: new Date(start),
 		end: new Date(end),
 		allDay: false
 	}
 
+	/* clean all fields */
+	clearFields();
+
+	/* add the event and hide the modal */
 	$('#calendar').fullCalendar('renderEvent', newEvent);
 	$('#add-event-modal').modal('hide');
+}
+
+function clearFields() {
+	$("#new-event-errors").empty();
+	$('#date-time-begin input').val("");
+	$('#date-time-end input').val("");
+	$('#event-name').val("");
 }

@@ -55,12 +55,12 @@
 							<div class="row" id="menu-event-list">
 								<div class="col-md-12">
 									<ul>
-									<li>Celery seakale</li>
-									<li>Dulse daikon</li>
-									<li>Zucchini garlic</li>
-									<li>Catsear azuki bean</li>
-									<li>Dandelion bunya</li>
-									<li>Rutabaga</li>
+										<li>Celery seakale</li>
+										<li>Dulse daikon</li>
+										<li>Zucchini garlic</li>
+										<li>Catsear azuki bean</li>
+										<li>Dandelion bunya</li>
+										<li>Rutabaga</li>
 									</ul>
 								</div>
 							</div>
@@ -95,19 +95,17 @@
 									<input type="text" class="form-control" placeholder="Search...">
 								</div>
 							</div>
-							<a href="./#">Celery seakale</a>
-							<a href="./#">Dulse daikon</a>
-							<a href="./#">Zucchini garlic</a>
-							<a href="./#">Catsear azuki bean</a>
-							<a href="./#">Dandelion bunya</a>
-							<a href="./#">Rutabaga</a>
+							<div class="row" id="menu-resources-list">
+								<div class="col-md-12">
+									<a href="./#">Licinio Roque</a>
+									<a href="./#">Sala G.5.2</a>
+									<a href="./#">Sala G.5.1</a>
+								</div>
+							</div>
 						</div>
-				
+					</div>
 				</div>
 			</div>
-
-				
-				
 
 			<div class="modal fade" id="add-event-modal">
 				<div class="modal-dialog">
@@ -117,6 +115,8 @@
 							<h4 class="modal-title">New Event</h4>
 						</div>
 						<div class="modal-body">
+							<div id="new-event-errors" class="bs-example bs-example-bg-classes">
+							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Name</span>
 								<input id="event-name" type="text" class="form-control" placeholder="">
@@ -151,7 +151,16 @@
 									<div class="panel panel-default">
 										<div class="panel-heading">Resources</div>
 										<div class="panel-body" id="new-event-resources">
-											Resources List
+											<span class="draggable-resource-item">Evento 1
+												<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span>
+											</span>
+											<span class="draggable-resource-item">Evento 2
+												<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span>
+											</span>
+											<span class="draggable-resource-item">Evento 2
+												<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span>
+											</span>
+											<div class="placeholder">Drop resources here...</div>
 										</div>
 									</div>
 								</div>
@@ -160,16 +169,25 @@
 								<div class="col-md-12">
 									<div class="panel panel-default">
 										<div class="panel-heading">Incompatible Events</div>
-										<div class="panel-body" id="new-event-incompatibler-events">
-											Incompatible Events List
+										<div class="panel-body" id="new-event-incompatible-events">
+											<span class="draggable-event-item">Evento 1
+												<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span>
+											</span>
+											<span class="draggable-event-item">Evento 2
+												<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span>
+											</span>
+											<span class="draggable-event-item">Evento 2
+												<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span>
+											</span>
+											<div class="placeholder">Drop incompatible Events here...</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary" onclick="saveEvent();">Save Event</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearFields()">Cancel</button>
+							<button type="button" class="btn btn-primary" onclick="saveEvent()">Save Event</button>
 						</div>
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
@@ -210,11 +228,11 @@
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
-
 		</div>
 
 		<!-- le javascript -->
 		<script type="text/javascript" src="./bower_components/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="./bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="./bower_components/moment/min/moment.min.js"></script>
 		<script type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="./bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>

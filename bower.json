@@ -16,7 +16,9 @@
   ],
   "dependencies": {
     "eonasdan-bootstrap-datetimepicker": "~3.0.0",
-    "fullcalendar": "~1.6.4"
+    "fullcalendar": "~1.6.4",
+    "jquery": "~1.10.2",
+    "jquery-ui": "~1.10.4"
   },
   "private": true
 }
