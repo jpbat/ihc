@@ -63,3 +63,53 @@ html, body {
 #menu-search {
     padding-bottom: 8px;
 }
+
+.placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.draggable-event-item {
+  background: #3a87ad;
+  color: #fff;
+  border:2px solid;
+  border-radius:25px;
+  border-color:#3a87ad #3a87ad;
+  padding: 0px 5px 0px 5px;
+}
+
+.draggable-event-item:hover {
+  padding: 0px 0px 0px 5px;
+}
+
+.draggable-event-item:hover > span {
+  display: inline;
+}
+
+.draggable-resource-item {
+  background: #ff6902;
+  color: #fff;
+  border:2px solid;
+  border-radius:25px;
+  border-color:#ff6902 #ff6902;
+  padding: 0px 5px 0px 5px;
+}
+
+.draggable-resource-item:hover {
+  padding: 0px 0px 0px 5px;
+}
+
+.draggable-resource-item:hover > span {
+  display: inline;
+}
+
+.object-item-remove-btn {
+  display: none;
+  margin: 0px -5px 0px -5px;
+}
+
+.object-item-remove-btn:hover {
+  display: none;
+  margin: 0px -5px 0px -5px;
+  color: #ccc;
+}
