@@ -402,3 +402,9 @@ function saveEditedEvent() {
 	$('#calendar').fullCalendar('updateEvent', edited);
 	$('#edit-event-modal').modal('hide');
 }
+
+/* EDIT STUFF  
+$( "#menu-resources-list li" ).dblclick(function() {
+  console.log( "Hello World!" );
+});
+*/
