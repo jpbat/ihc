@@ -183,7 +183,7 @@
 								<div class="col-md-12">
 									<div class="input-group">
 										<span class="input-group-addon">Name</span>
-										<input id="resource-name" type="text" class="form-control" placeholder="">
+										<input id="new-resource-name" type="text" class="form-control" placeholder="">
 									</div>
 								</div>
 							</div>
@@ -194,7 +194,7 @@
 										<div class="panel-heading">
 											Description
 										</div>
-										<textarea id="resource-description" class="form-control" style="resize:none;" rows="4"></textarea>
+										<textarea id="new-resource-description" class="form-control" style="resize:none;" rows="4"></textarea>
 									</div>
 								</div>
 							</div>
@@ -207,8 +207,46 @@
 				</div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
 		</div>
-
-		<!-- edit event -->
+		<!-- Edit Resource modal -->
+		<div class="modal fade" id="edit-resource-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">New Resource</h4>
+					</div>
+					<div class="modal-body">
+						<div id="edit-resources-errors" class="bs-example bs-example-bg-classes">
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">Name</span>
+									<input id="edit-resource-name" type="text" class="form-control" placeholder="">
+								</div>
+							</div>
+						</div>
+						<p>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										Description
+									</div>
+									<textarea id="edit-resource-description" class="form-control" style="resize:none;" rows="4"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button type="button" onclick="saveEditedResource()" class="btn btn-primary">Save Resource</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	
+		<!-- edit event modal -->
 		<div class="modal fade" id="edit-event-modal">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -267,7 +305,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearEventsFields()">Cancel</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearEventFields()">Cancel</button>
 						<button type="button" class="btn btn-primary" onclick="saveEditedEvent()">Save Event</button>
 					</div>
 				</div><!-- /.modal-content -->

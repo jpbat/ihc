@@ -68,10 +68,12 @@ $(document).ready(function() {
 	resourcesList = [
 		{ 
 			id: nextResourceId++,
+			description: "Professor de IHC/EDJ",
 			name:"Licinio Roque"
 		},
 		{
 			id: nextResourceId++,
+			description: "Costuma cheirar a lasanha.",
 			name: "Sala G.5.2" 
 		}];
 	
@@ -273,10 +275,10 @@ function saveResource() {
 
 	$("#new-resource-errors").empty();
 
-	var description = $('#resource-description').val();
-	var name = $('#resource-name').val();
+	var description = $('#new-resource-description').val();
+	var name = $('#new-resource-name').val();
 
-	console.log("end: " + description);
+	console.log("description: " + description);
 	console.log("name: " + name);
 
 	/* checking validity of stuff*/
@@ -293,7 +295,7 @@ function saveResource() {
 	}
 
 	/* clean all fields */
-	clearResourceFields();
+	clearNewResourceFields();
 
 	/* add event to global list */
 	resourcesList.push(newResource);
@@ -324,6 +326,7 @@ $('#search-event').on({
 });
 
 function listEventsInMenu(searchWord){
+	$('#menu-events-list ul').empty();
 	if(!searchWord){
 		eventsList.forEach(createEvent);
 	}
@@ -339,6 +342,7 @@ function listEventsInMenu(searchWord){
 }
 
 function listResourcesInMenu(searchWord){
+	$('#menu-resources-list ul').empty();
 	if(!searchWord){
 		resourcesList.forEach(createResource);
 	}
@@ -352,10 +356,10 @@ function listResourcesInMenu(searchWord){
 		});
 	}	
 }
-function clearResourceFields() {
+function clearNewResourceFields() {
 	$("#new-event-errors").empty();
-	$('#resource-description').val("");
-	$('#resource-name').val("");
+	$('#new-resource-description').val("");
+	$('#new-resource-name').val("");
 }
 
 function clearEventFields() {
@@ -366,13 +370,54 @@ function clearEventFields() {
 }
 
 function editEvent(ev) {
-	console.log(ev);
-	edited = ev;
+	edited_event = ev;
 	$('#edit-event-title').html(ev.title);
 	$('#edit-event-start').val(ev.start);
 	$('#edit-event-end').val(ev.end);
 	$('#event-id').val(ev.id);
 	$('#edit-event-modal').modal('show');
+}
+
+function editResource(ev) {
+	console.log(ev);
+	edited_resource = ev;
+	$('#edit-resource-name').val(ev.name);
+	$('#edit-resource-description').val(ev.description);
+	$('#resource-id').val(ev.id);
+	$('#edit-resource-modal').modal('show');
+}
+
+function saveEditedResource() {
+
+	$("#edit-resource-errors").empty();
+
+	var description = $('#edit-resource-description').val();
+	var name = $('#edit-resource-name').val();
+	console.log(name);
+	/* checking validity of stuff*/
+	if (name.length == 0) {
+		$("#edit-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a name to the resource.</div>");
+		console.log("error, no name")
+		return;
+	}
+	/* save in global array */
+	var aux = $.grep(resourcesList, function(e){ 
+			return e.id == edited_resource.id;
+		})[0];
+
+	aux.name = name;
+	aux.description = description;
+
+	/* clean all fields */
+	clearEditedResourceFields();
+
+	/* add the event and hide the modal */
+	$('#edit-resource-modal').modal('hide');
+	listResourcesInMenu();
+}
+//TODO DO THIS
+function clearEditedResourceFields(){
+
 }
 
 function saveEditedEvent() {
@@ -381,9 +426,6 @@ function saveEditedEvent() {
 
 	var start = $('#edit-time-begin input').val();
 	var end = $('#edit-time-end input').val();
-
-	console.log("start: " + start);
-	console.log("end: " + end);
 
 	/* checking validity of stuff*/
 	if (start.length == 0) {
@@ -404,30 +446,37 @@ function saveEditedEvent() {
 		return;
 	}
 
-	edited.start = new Date(start);
-	edited.end = new Date(end);
+	edited_event.start = new Date(start);
+	edited_event.end = new Date(end);
 
 	/* clean all fields */
 	clearEventFields();
 
 	/* add the event and hide the modal */
-	$('#calendar').fullCalendar('updateEvent', edited);
+	$('#calendar').fullCalendar('updateEvent', edited_event);
+
+	listEventsInMenu();
 	$('#edit-event-modal').modal('hide');
 }
 
-/* EDIT STUFF  
-$( "#menu-resources-list li" ).dblclick(function() {
-  console.log( "Hello World!" );
-});
-*/
+/* Double click Edit Stuff  */
 $("#menu-resources-list").on("dblclick","li",function(){
-	console.log("db click");
-});
+	var li = this;
+	
+	editResource(
+		$.grep(
+			resourcesList, function(e){ 
+				return e.id == li.id.replace("rsc-","");
+		})[0]
+	)}
+);
+
 $("#menu-events-list").on("dblclick","li", function(){
 	var li = this;
 	
-	editEvent($.grep(eventsList, function(e){ 
-		console.log(e.id == li.id.replace("evt-",""));
-		return e.id == li.id.replace("evt-","");
+	editEvent(
+		$.grep(eventsList, function(e){ 
+			return e.id == li.id.replace("evt-","");
 		})[0]
-	)});
+	)
+});
