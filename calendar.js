@@ -81,6 +81,11 @@ $(document).ready(function() {
 		theme: true,
 		aspectRatio: 1.1,
 		editable: true,
+		header: {
+				left: 'prev,today,next',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
 		events: eventsList, //add events to Calendar
 		eventClick: function(event) {
 			editEvent(event);
@@ -149,7 +154,8 @@ $(function() {
     	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<span class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+        console.log(ui.draggable);
+        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",
@@ -180,7 +186,7 @@ $(function() {
     	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<span class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",
