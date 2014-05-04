@@ -186,7 +186,7 @@ $(function() {
     	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( '<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove" onclick="removeItem(this)"></span>' ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",
@@ -206,7 +206,7 @@ $(function() {
     	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( '<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove" onclick="removeItem(this)"></span>' ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",
@@ -244,7 +244,7 @@ $(function() {
     	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove' onclick='removeItem(this)'></span>" ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",
@@ -264,7 +264,7 @@ $(function() {
     	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove' onclick='removeItem(this)'></span>" ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",
@@ -447,7 +447,7 @@ function clearEventFields() {
 	$('#new-event-resources').empty();
 	$('#new-event-resources').append('<div class="placeholder">Drop resources here...</div>');
 	$('#new-event-incompatible-events').empty();
-	$('#new-event-incompatible-events').append('<div class="placeholder">Drop incompatible Events here...</div>');
+	$('#new-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here...</div>');
 }
 
 function editEvent(ev) {
@@ -466,7 +466,7 @@ function editEvent(ev) {
 			})[0]
 			$('#edit-event-resources').append( 
 				'<span id="rsc-' + resource.id + '" class="dragged-resource-item">' + resource.name + 
-				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span></span>' );
+				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove" onclick="removeItem(this)"></span></span>' );
 		});
 	}
 	else
@@ -482,12 +482,12 @@ function editEvent(ev) {
 			})[0]
 			$('#edit-event-incompatible-events').append( 
 				'<span id="evt-' + incompatibleEvent.id + '" class="dragged-event-item">' + incompatibleEvent.title + 
-				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span></span>' );
+				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove" onclick="removeItem(this)"></span></span>' );
 		});
 	}
 	else 
 	{
-		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible Events here...</div>');
+		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here...</div>');
 	}
 
 	$("#edit-event-errors").empty();
@@ -629,3 +629,20 @@ $("#menu-events-list").on("dblclick","li", function(){
 
 	)
 });
+
+function removeItem(elem) {
+	var item = $(elem).parent();
+	var itemArea = $(item).parent();
+	item.remove();
+	if ( $(itemArea).children().length == 0 ) {
+		if ( $(itemArea).attr('id') == 'new-event-resources' || $(itemArea).attr('id') == 'edit-event-resources' ) {
+			itemArea.append('<div class="placeholder">Drop resources here...</div>');
+		}
+		else
+		{
+			itemArea.append('<div class="placeholder">Drop incompatible events here...</div>');
+		}
+	}
+}
+
+
