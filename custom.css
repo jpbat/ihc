@@ -65,9 +65,11 @@ padding-right: 15px;
 
 #right-menu > .menu-content li:hover {
   background: #ffa877;
+  cursor: pointer;
 }
 #left-menu > .menu-content li:hover {
   background: #caedff;
+  cursor: pointer;
 }
 .area-to-drag-event-element {
   background: #caedff;
