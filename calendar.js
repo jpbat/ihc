@@ -209,7 +209,10 @@ function setDraggableEvents() {
 
 $(function() {
     setDraggableEvents();
-    $( "#new-event-incompatible-events" ).droppable({
+    $( "#new-event-incompatible-events" )
+    .dblclick(function(){
+ 		 console.log( "Hello World!" );
+	}).droppable({
       activeClass: "area-to-drag-event-element",
       hoverClass: "ui-state-hover ",
       accept: function(d) { 
@@ -322,7 +325,7 @@ function saveResource() {
 
 	/* checking validity of stuff*/
 	if (name.length == 0) {
-		$("#new-resource-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
+		$("#new-resource-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a name to the resource.</div>");
 		console.log("Please add a name to the resource.")
 		return;
 	}
@@ -459,3 +462,20 @@ function saveEditedEvent() {
 	$('#calendar').fullCalendar('updateEvent', edited);
 	$('#edit-event-modal').modal('hide');
 }
+
+/* EDIT STUFF  
+$( "#menu-resources-list li" ).dblclick(function() {
+  console.log( "Hello World!" );
+});
+*/
+$("#menu-resources-list").on("dblclick","li",function(){
+	console.log("db click");
+});
+$("#menu-events-list").on("dblclick","li", function(){
+	var li = this;
+	
+	editEvent($.grep(eventsList, function(e){ 
+		console.log(e.id == li.id.replace("evt-",""));
+		return e.id == li.id.replace("evt-","");
+		})[0]
+	)});
