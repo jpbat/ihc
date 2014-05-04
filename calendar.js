@@ -96,12 +96,12 @@ $(document).ready(function() {
 });
 
 function createEvent(elem) {
-	$("<li id=evt-'" + elem.id + "' class='event-item ui-draggable'>")
+	$("<li id=evt-" + elem.id + " class='event-item ui-draggable'>")
 		.text(elem.title).appendTo('#menu-events-list ul');
 }
 
 function createResource(elem) {
-	$("<li id=rsc-'" + elem.id + "' class='resource-item ui-draggable'>")
+	$("<li id=rsc-" + elem.id + " class='resource-item ui-draggable'>")
 		.text(elem.name).appendTo('#menu-resources-list ul');
 }
 
@@ -238,7 +238,7 @@ function saveEvent() {
 	}
 
 	/* clean all fields */
-	clearFields();
+	clearEventFields();
 
 	/* add event to global list */
 	eventsList.push(newEvent);
@@ -249,6 +249,42 @@ function saveEvent() {
 	/* add the event to DOM and hide the modal */
 	$('#calendar').fullCalendar('renderEvent', newEvent);
 	$('#add-event-modal').modal('hide');
+}
+
+function saveResource() {
+
+	$("#new-resource-errors").empty();
+
+	var description = $('#resource-description').val();
+	var name = $('#resource-name').val();
+
+	console.log("end: " + description);
+	console.log("name: " + name);
+
+	/* checking validity of stuff*/
+	if (name.length == 0) {
+		$("#new-resource-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
+		console.log("Please add a name to the resource.")
+		return;
+	}
+
+	newResource = {
+		name: name,
+		id: nextResourceId++,
+		description: description,
+	}
+
+	/* clean all fields */
+	clearResourceFields();
+
+	/* add event to global list */
+	resourcesList.push(newResource);
+
+	/* Add to Menu List */
+	createResource(newResource);
+
+	/* add the event to DOM and hide the modal */
+	$('#add-resource-modal').modal('hide');
 }
 
 
@@ -298,8 +334,13 @@ function listResourcesInMenu(searchWord){
 		});
 	}	
 }
+function clearResourceFields() {
+	$("#new-event-errors").empty();
+	$('#resource-description').val("");
+	$('#resource-name').val("");
+}
 
-function clearFields() {
+function clearEventFields() {
 	$("#new-event-errors").empty();
 	$('#date-time-begin input').val("");
 	$('#date-time-end input').val("");
@@ -349,7 +390,7 @@ function saveEditedEvent() {
 	edited.end = new Date(end);
 
 	/* clean all fields */
-	clearFields();
+	clearEventFields();
 
 	/* add the event and hide the modal */
 	$('#calendar').fullCalendar('updateEvent', edited);
