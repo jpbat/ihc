@@ -128,7 +128,7 @@ $(function() {
       helper: "clone",
       cursor: "move",
       start: function(e, ui) {
-		  $(ui.helper).addClass("draggable-resource-item");
+		  $(ui.helper).addClass("dragging-resource-item");
 		 }
     });
     $( "#new-event-resources" ).droppable({
@@ -141,7 +141,7 @@ $(function() {
     	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<span class='draggable-resource-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+        $( "<span class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",
@@ -159,7 +159,7 @@ $(function() {
       helper: "clone",
       cursor: "move",
       start: function(e, ui) {
-		  $(ui.helper).addClass("draggable-event-item");
+		  $(ui.helper).addClass("dragging-event-item");
 		 }
     });
     $( "#new-event-incompatible-events" ).droppable({
@@ -172,7 +172,7 @@ $(function() {
     	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<span class='draggable-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+        $( "<span class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",

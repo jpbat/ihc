@@ -30,7 +30,7 @@ html, body {
 }
 
 #right-menu, #left-menu {
-    /* overflow: auto; */
+    overflow: visible;
     position: absolute;
     z-index: 9000;
 }
@@ -39,8 +39,8 @@ html, body {
     background: #bcbcbc;
     position: absolute;
     top: -70px;
-    width: 100%;
-    left: 0px;
+    width: 206px;
+    left: -15px;
 }
 .menu-header-item {
 padding-left: 15px;
@@ -89,7 +89,18 @@ padding-right: 15px;
     font-style: italic;
 }
 
-.draggable-event-item {
+.dragging-event-item {
+  background: #3a87ad;
+  color: #fff;
+  border:2px solid;
+  border-radius:25px;
+  border-color:#3a87ad #3a87ad;
+  padding: 0px 5px 0px 5px;
+  list-style-type: none;
+  position: absolute;
+  z-index: 9999;
+}
+.dragged-event-item {
   background: #3a87ad;
   color: #fff;
   border:2px solid;
@@ -99,14 +110,25 @@ padding-right: 15px;
   list-style-type: none;
 }
 
-.draggable-event-item:hover {
+.dragged-event-item:hover {
   padding: 0px 0px 0px 5px;
 }
 
-.draggable-event-item:hover > span {
+.dragged-event-item:hover > span {
   display: inline;
 }
-.draggable-resource-item {
+.dragging-resource-item {
+  background: #ff6902;
+  color: #fff;
+  border:2px solid;
+  border-radius:25px;
+  border-color:#ff6902 #ff6902;
+  padding: 0px 5px 0px 5px;
+  list-style-type: none;
+  position: absolute;
+  z-index: 9999;
+}
+.dragged-resource-item {
   background: #ff6902;
   color: #fff;
   border:2px solid;
@@ -116,11 +138,11 @@ padding-right: 15px;
   list-style-type: none;
 }
 
-.draggable-resource-item:hover {
+.dragged-resource-item:hover {
   padding: 0px 0px 0px 5px;
 }
 
-.draggable-resource-item:hover > span {
+.dragged-resource-item:hover > span {
   display: inline;
 }
 
@@ -135,8 +157,9 @@ padding-right: 15px;
   color: #ccc;
 }
 
-#menu-events-list, #menu-resource-list {
+#menu-events-list, #menu-resources-list {
   background: #fff;
+  width: 206px;
 }
 
 
