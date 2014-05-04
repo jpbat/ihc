@@ -65,7 +65,7 @@ $(document).ready(function() {
 	})
 
 	$('#calendar').fullCalendar('changeView', 'agendaWeek' );
-	
+
 });
 
 function addResource(name) {
@@ -76,6 +76,7 @@ function addResource(name) {
 
 function addEvent(name) {
 	$('#add-event-modal').modal('show');
+	$('#add-resource-modal').modal('hide');
 	// $('<a/>', {
 	// 	text: name
 	// }).appendTo('#left-menu');
@@ -83,6 +84,7 @@ function addEvent(name) {
 
 function addResource(name) {
 	$('#add-resource-modal').modal('show');
+	$('#add-event-modal').modal('hide');
 	// $('<a/>', {
 	// 	text: name
 	// }).appendTo('#left-menu');
@@ -95,18 +97,28 @@ $(function () {
 	$('#edit-time-end').datetimepicker();
 });
 
+// ######################################################################
+// Drag and drop
 $(function() {
     $( "#menu-resources-list li" ).draggable({
       appendTo: "body",
-      helper: "clone"
+      helper: "clone",
+      cursor: "move",
+      start: function(e, ui) {
+		  $(ui.helper).addClass("draggable-resource-item");
+		 }
     });
     $( "#new-event-resources" ).droppable({
-      activeClass: "ui-state-default",
+      activeClass: "area-to-drag-resource-element",
       hoverClass: "ui-state-hover",
-      accept: ":not(.ui-sortable-helper)",
+      accept: function(d) { 
+	        if(d.hasClass("resource-item")){ 
+	            return true;
+	        }
+    	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        $( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+        $( "<span class='draggable-resource-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
       }
     }).sortable({
       items: "li:not(.placeholder)",
@@ -118,6 +130,40 @@ $(function() {
     });
 });
 
+$(function() {
+    $( "#menu-event-list li" ).draggable({
+      appendTo: "body",
+      helper: "clone",
+      cursor: "move",
+      start: function(e, ui) {
+		  $(ui.helper).addClass("draggable-event-item");
+		 }
+    });
+    $( "#new-event-incompatible-events" ).droppable({
+      activeClass: "area-to-drag-event-element",
+      hoverClass: "ui-state-hover ",
+      accept: function(d) { 
+	        if(d.hasClass("event-item")){ 
+	            return true;
+	        }
+    	},
+      drop: function( event, ui ) {
+        $( this ).find( ".placeholder" ).remove();
+        $( "<span class='draggable-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+      }
+    }).sortable({
+      items: "li:not(.placeholder)",
+      sort: function() {
+        // gets added unintentionally by droppable interacting with sortable
+        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+        $( this ).removeClass( "ui-state-default" );
+      }
+    });
+});
+
+
+// ####################################################
+// Drag and drop
 function saveEvent() {
 
 	$("#new-event-errors").empty();
