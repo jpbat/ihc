@@ -69,18 +69,26 @@ padding-right: 15px;
 }
 
 #right-menu > .menu-content li:hover {
-  background: #ffa877;
+  background: #FECBA7;
   cursor: pointer;
 }
 #left-menu > .menu-content li:hover {
-  background: #caedff;
+  background: #BCD2DD;
   cursor: pointer;
 }
 .area-to-drag-event-element {
-  background: #caedff;
+  background: #77A4BB;
+  opacity:0.5;
+}
+.area-to-drag-event-element .placeholder{
+  color: #000;
 }
 .area-to-drag-resource-element {
-  background: #ffcbb6;
+  background: #FF964E;
+  opacity:0.5;
+}
+.area-to-drag-resource-element .placeholder{
+  color: #000;
 }
 
 .add-btn {
@@ -168,5 +176,11 @@ padding-right: 15px;
   background: #fff;
   width: 206px;
 }
+/*
+.ui-droppable > span {
+  white-space:nowrap;
+}
 
-
+.ui-droppable > span > span{
+  white-space:normal;
+}*/
