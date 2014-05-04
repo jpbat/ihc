@@ -334,8 +334,6 @@ function saveEvent() {
 		}
 	});
 
-	console.log(newEvent);
-
 	/* clean all fields */
 	clearEventFields();
 
@@ -467,7 +465,7 @@ function editEvent(ev) {
 					return e.id == value;
 			})[0]
 			$('#edit-event-resources').append( 
-				'<span id="rsc-"' + resource.id + ' class="dragged-resource-item">' + resource.name + 
+				'<span id="rsc-' + resource.id + '" class="dragged-resource-item">' + resource.name + 
 				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span></span>' );
 		});
 	}
@@ -483,7 +481,7 @@ function editEvent(ev) {
 					return e.id == value;
 			})[0]
 			$('#edit-event-incompatible-events').append( 
-				'<span id="evt-"' + incompatibleEvent.id + ' class="dragged-event-item">' + incompatibleEvent.title + 
+				'<span id="evt-' + incompatibleEvent.id + '" class="dragged-event-item">' + incompatibleEvent.title + 
 				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span></span>' );
 		});
 	}
@@ -491,6 +489,8 @@ function editEvent(ev) {
 	{
 		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible Events here...</div>');
 	}
+
+	$("#edit-event-errors").empty();
 
 	$('#edit-event-modal').modal('show');
 	$('#edit-resource-modal').modal('hide');
@@ -550,6 +550,7 @@ function saveEditedEvent() {
 
 	var start = $('#edit-time-begin input').val();
 	var end = $('#edit-time-end input').val();
+	var name = $('#edit-event-name').val();
 
 	/* checking validity of stuff*/
 	if (start.length == 0) {
@@ -569,9 +570,32 @@ function saveEditedEvent() {
 		console.log("start date should be before end date.")
 		return;
 	}
+	if (name.length == 0) {
+		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
+		console.log("Please add a title to the event.")
+		return;
+	}
 
+	edited_event.title = name;
 	edited_event.start = new Date(start);
 	edited_event.end = new Date(end);
+	edited_event.resources = [];
+	edited_event.incompatibleEvents = [];
+
+	// Modifies resources in the event
+	$('#edit-event-resources').children('span').each( function(i) {
+		id = $(this).attr('id').replace("rsc-","");
+		if ($.inArray( id, edited_event.resources ) == -1) {
+			edited_event.resources.push(id);
+		}
+	});
+	// Modifies incompatible events in the event
+	$('#edit-event-incompatible-events').children('span').each( function(i) {
+		id = $(this).attr('id').replace("evt-","");
+		if ($.inArray( id, edited_event.incompatibleEvents ) == -1) {
+			edited_event.incompatibleEvents.push(id);
+		}
+	});
 
 	/* clean all fields */
 	clearEventFields();
