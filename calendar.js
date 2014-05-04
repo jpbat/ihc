@@ -103,11 +103,13 @@ $(document).ready(function() {
 function createEvent(elem) {
 	$("<li id=evt-" + elem.id + " class='event-item ui-draggable'>")
 		.text(elem.title).appendTo('#menu-events-list ul');
+	setDraggableEvents();
 }
 
 function createResource(elem) {
 	$("<li id=rsc-" + elem.id + " class='resource-item ui-draggable'>")
 		.text(elem.name).appendTo('#menu-resources-list ul');
+	setDraggableResources();
 }
 
 function addEvent(name) {
@@ -135,8 +137,8 @@ $(function () {
 
 // ######################################################################
 // Drag and drop
-$(function() {
-    $( "#menu-resources-list li" ).draggable({
+function setDraggableResources() {
+	$( "#menu-resources-list li" ).draggable({
       appendTo: "body",
       helper: "clone",
       cursor: "move",
@@ -144,6 +146,10 @@ $(function() {
 		  $(ui.helper).addClass("dragging-resource-item");
 		 }
     });
+}
+
+$(function() {
+    setDraggableResources();
     $( "#new-event-resources" ).droppable({
       activeClass: "area-to-drag-resource-element",
       hoverClass: "ui-state-hover",
@@ -154,7 +160,6 @@ $(function() {
     	},
       drop: function( event, ui ) {
         $( this ).find( ".placeholder" ).remove();
-        console.log(ui.draggable);
         $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
       }
     }).sortable({
@@ -167,8 +172,8 @@ $(function() {
     });
 });
 
-$(function() {
-    $( "#menu-events-list li" ).draggable({
+function setDraggableEvents() {
+	$( "#menu-events-list li" ).draggable({
       appendTo: "body",
       helper: "clone",
       cursor: "move",
@@ -176,6 +181,10 @@ $(function() {
 		  $(ui.helper).addClass("dragging-event-item");
 		 }
     });
+}
+
+$(function() {
+    setDraggableEvents();
     $( "#new-event-incompatible-events" ).droppable({
       activeClass: "area-to-drag-event-element",
       hoverClass: "ui-state-hover ",
