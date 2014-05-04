@@ -463,9 +463,13 @@ function saveEditedResource() {
 	$('#edit-resource-modal').modal('hide');
 	listResourcesInMenu();
 }
+
 //TODO DO THIS
 function clearEditedResourceFields(){
-
+	$('#edit-event-incompatible-events').empty();
+	$('#edit-event-resources').empty();
+	$('#new-event-resources').empty();
+	$('#new-event-incompatible-events').empty();
 }
 
 function saveEditedEvent() {
