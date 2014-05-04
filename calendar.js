@@ -460,8 +460,8 @@ function editEvent(ev) {
 	$('#edit-event-end').val(ev.end);
 	$('#event-id').val(ev.id);
 
+	$('#edit-event-resources').empty();
 	if (ev.resources.length != 0) {
-		$('#edit-event-resources').empty();
 		$.each(ev.resources, function( key, value ) {
 			resource = $.grep( resourcesList, function(e){ 
 					return e.id == value;
@@ -471,9 +471,13 @@ function editEvent(ev) {
 				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span></span>' );
 		});
 	}
+	else
+	{
+		$('#edit-event-resources').append('<div class="placeholder">Drop resources here...</div>');
+	}
 
+	$('#edit-event-incompatible-events').empty();
 	if (ev.incompatibleEvents.length != 0) {
-		$('#edit-event-incompatible-events').empty();
 		$.each(ev.incompatibleEvents, function( key, value ) {
 			incompatibleEvent = $.grep( eventsList, function(e){ 
 					return e.id == value;
@@ -482,6 +486,10 @@ function editEvent(ev) {
 				'<span id="evt-"' + incompatibleEvent.id + ' class="dragged-event-item">' + incompatibleEvent.title + 
 				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span></span>' );
 		});
+	}
+	else 
+	{
+		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible Events here...</div>');
 	}
 
 	$('#edit-event-modal').modal('show');
