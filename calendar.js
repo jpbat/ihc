@@ -7,6 +7,15 @@ $(document).ready(function() {
 	var m = date.getMonth();
 	var y = date.getFullYear();
 
+	var eventsList = [];
+	var resourcesList = [
+		{ 
+			name:"Licinio Roque"
+		},
+		{
+			name: "Sala G.5.2" 
+		}];
+	
 	$('#calendar').fullCalendar({
 		// put your options and callbacks here
 
@@ -65,17 +74,19 @@ $(document).ready(function() {
 	})
 
 	$('#calendar').fullCalendar('changeView', 'agendaWeek' );
+	resourcesList.forEach(createResource);
 	
 });
 
-function addResource(name) {
-	$('<a/>', {
-		text: name
-	}).appendTo('#right-menu');
+function createResource(elem) {
+	$('<li>', {
+		text: elem.name
+	}).appendTo('#menu-resources-list ul');
 }
 
 function addEvent(name) {
 	$('#add-event-modal').modal('show');
+	
 	// $('<a/>', {
 	// 	text: name
 	// }).appendTo('#left-menu');
@@ -117,6 +128,12 @@ $(function() {
       }
     });
 });
+
+function addMenuList(){
+   $( "<li></li>" ).text( "something").appendTo( this );
+  
+}
+
 
 function saveEvent() {
 
@@ -166,9 +183,14 @@ function saveEvent() {
 	/* clean all fields */
 	clearFields();
 
-	/* add the event and hide the modal */
+	/* add event to global list */
+	events.push(newEvent);
+	/* add the event to DOM and hide the modal */
 	$('#calendar').fullCalendar('renderEvent', newEvent);
 	$('#add-event-modal').modal('hide');
+
+
+
 }
 
 function clearFields() {
