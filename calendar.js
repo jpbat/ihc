@@ -15,54 +15,74 @@ $(document).ready(function() {
 				id: nextEventId++,
 				title: 'All Day Event',
 				start: new Date(y, m, 1),
-				end: new Date(y, m, 2)
+				end: new Date(y, m, 2),
+				allDay: true,
+				resources: [],
+				incompatibleEvents: []
 			},
 			{
 				id: nextEventId++,
 				title: 'Long Event',
 				start: new Date(y, m, d-5),
-				end: new Date(y, m, d-2)
+				end: new Date(y, m, d-2),
+				allDay: true,
+				resources: [],
+				incompatibleEvents: []
 			},
 			{
 				id: nextEventId++,
 				title: 'Repeating Event',
 				start: new Date(y, m, d-3, 16, 0),
 				end: new Date(y, m, d, 0),
-				allDay: false
+				allDay: false,
+				resources: [],
+				incompatibleEvents: []
 			},
 			{
 				id: nextEventId++,
 				title: 'Repeating Event',
 				start: new Date(y, m, d+4, 16, 0),
 				end: new Date(y, m, d+4,20,0),
-				allDay: false
+				allDay: false,
+				resources: [],
+				incompatibleEvents: []
 			},
 			{
 				id: nextEventId++,
 				title: 'Meeting',
 				start: new Date(y, m, d, 10, 30),
-				allDay: false
+				end: new Date(y, m, d ,14, 0),
+				allDay: false,
+				resources: [],
+				incompatibleEvents: []
 			},
 			{
 				id: nextEventId++,
 				title: 'Lunch',
 				start: new Date(y, m, d, 12, 0),
 				end: new Date(y, m, d, 14, 0),
-				allDay: false
+				allDay: false,
+				resources: [],
+				incompatibleEvents: []
 			},
 			{
 				id: nextEventId++,
 				title: 'Birthday Party',
 				start: new Date(y, m, d+1, 19, 0),
 				end: new Date(y, m, d+1, 22, 30),
-				allDay: false
+				allDay: false,
+				resources: [],
+				incompatibleEvents: []
 			},
 			{
 				id: nextEventId++,
 				title: 'Click for Google',
 				start: new Date(y, m, 28),
 				end: new Date(y, m, 29),
-				url: 'http://google.com/'
+				url: 'http://google.com/',
+				allDay: true,
+				resources: [],
+				incompatibleEvents: []
 			}
 		];
 	resourcesList = [
@@ -264,10 +284,6 @@ function saveEvent() {
 	var end = $('#date-time-end input').val();
 	var name = $('#event-name').val();
 
-	console.log("start: " + start);
-	console.log("end: " + end);
-	console.log("name: " + name);
-
 	/* checking validity of stuff*/
 	if (start.length == 0) {
 		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
@@ -298,8 +314,27 @@ function saveEvent() {
 		title: name,
 		start: new Date(start),
 		end: new Date(end),
-		allDay: false
+		allDay: false,
+		resources: [],
+		incompatibleEvents: []
 	}
+
+	// Add resources to the event
+	$('#new-event-resources').children('span').each( function(i) {
+		id = $(this).attr('id').replace("rsc-","");
+		if ($.inArray( id, newEvent.resources ) == -1) {
+			newEvent.resources.push(id);
+		}
+	});
+	// Add incompatible events to the event
+	$('#new-event-incompatible-events').children('span').each( function(i) {
+		id = $(this).attr('id').replace("evt-","");
+		if ($.inArray( id, newEvent.incompatibleEvents ) == -1) {
+			newEvent.incompatibleEvents.push(id);
+		}
+	});
+
+	console.log(newEvent);
 
 	/* clean all fields */
 	clearEventFields();
@@ -407,10 +442,14 @@ function clearNewResourceFields() {
 }
 
 function clearEventFields() {
-	$("#new-event-errors").empty();
+	$('#new-event-errors').empty();
+	$('#event-name').val("");
 	$('#date-time-begin input').val("");
 	$('#date-time-end input').val("");
-	$('#event-name').val("");
+	$('#new-event-resources').empty();
+	$('#new-event-resources').append('<div class="placeholder">Drop resources here...</div>');
+	$('#new-event-incompatible-events').empty();
+	$('#new-event-incompatible-events').append('<div class="placeholder">Drop incompatible Events here...</div>');
 }
 
 function editEvent(ev) {
@@ -420,6 +459,31 @@ function editEvent(ev) {
 	$('#edit-event-start').val(ev.start);
 	$('#edit-event-end').val(ev.end);
 	$('#event-id').val(ev.id);
+
+	if (ev.resources.length != 0) {
+		$('#edit-event-resources').empty();
+		$.each(ev.resources, function( key, value ) {
+			resource = $.grep( resourcesList, function(e){ 
+					return e.id == value;
+			})[0]
+			$('#edit-event-resources').append( 
+				'<span id="rsc-"' + resource.id + ' class="dragged-resource-item">' + resource.name + 
+				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span></span>' );
+		});
+	}
+
+	if (ev.incompatibleEvents.length != 0) {
+		$('#edit-event-incompatible-events').empty();
+		$.each(ev.incompatibleEvents, function( key, value ) {
+			incompatibleEvent = $.grep( eventsList, function(e){ 
+					return e.id == value;
+			})[0]
+			$('#edit-event-incompatible-events').append( 
+				'<span id="evt-"' + incompatibleEvent.id + ' class="dragged-event-item">' + incompatibleEvent.title + 
+				'<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove"></span></span>' );
+		});
+	}
+
 	$('#edit-event-modal').modal('show');
 	$('#edit-resource-modal').modal('hide');
 	$('#add-resource-modal').modal('hide');
