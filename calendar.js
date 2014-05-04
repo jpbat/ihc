@@ -115,6 +115,8 @@ function createResource(elem) {
 function addEvent(name) {
 	$('#add-event-modal').modal('show');
 	$('#add-resource-modal').modal('hide');
+	$('#edit-event-modal').modal('hide');
+	$('#edit-resource-modal').modal('hide');
 	// $('<a/>', {
 	// 	text: name
 	// }).appendTo('#left-menu');
@@ -123,6 +125,8 @@ function addEvent(name) {
 function addResource(name) {
 	$('#add-resource-modal').modal('show');
 	$('#add-event-modal').modal('hide');
+	$('#edit-event-modal').modal('hide');
+	$('#edit-resource-modal').modal('hide');
 	// $('<a/>', {
 	// 	text: name
 	// }).appendTo('#left-menu');
@@ -170,6 +174,26 @@ $(function() {
         $( this ).removeClass( "ui-state-default" );
       }
     });
+    $( "#edit-event-resources" ).droppable({
+      activeClass: "area-to-drag-resource-element",
+      hoverClass: "ui-state-hover",
+      accept: function(d) { 
+	        if(d.hasClass("resource-item")){ 
+	            return true;
+	        }
+    	},
+      drop: function( event, ui ) {
+        $( this ).find( ".placeholder" ).remove();
+        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+      }
+    }).sortable({
+      items: "li:not(.placeholder)",
+      sort: function() {
+        // gets added unintentionally by droppable interacting with sortable
+        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+        $( this ).removeClass( "ui-state-default" );
+      }
+    });
 });
 
 function setDraggableEvents() {
@@ -186,6 +210,26 @@ function setDraggableEvents() {
 $(function() {
     setDraggableEvents();
     $( "#new-event-incompatible-events" ).droppable({
+      activeClass: "area-to-drag-event-element",
+      hoverClass: "ui-state-hover ",
+      accept: function(d) { 
+	        if(d.hasClass("event-item")){ 
+	            return true;
+	        }
+    	},
+      drop: function( event, ui ) {
+        $( this ).find( ".placeholder" ).remove();
+        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove'></span>" ).appendTo( this );
+      }
+    }).sortable({
+      items: "li:not(.placeholder)",
+      sort: function() {
+        // gets added unintentionally by droppable interacting with sortable
+        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+        $( this ).removeClass( "ui-state-default" );
+      }
+    });
+    $( "#edit-event-incompatible-events" ).droppable({
       activeClass: "area-to-drag-event-element",
       hoverClass: "ui-state-hover ",
       accept: function(d) { 
@@ -366,10 +410,14 @@ function editEvent(ev) {
 	console.log(ev);
 	edited = ev;
 	$('#edit-event-title').html(ev.title);
+	$('#edit-event-name').val(ev.title);
 	$('#edit-event-start').val(ev.start);
 	$('#edit-event-end').val(ev.end);
 	$('#event-id').val(ev.id);
 	$('#edit-event-modal').modal('show');
+	$('#edit-resource-modal').modal('hide');
+	$('#add-resource-modal').modal('hide');
+	$('#add-event-modal').modal('hide');
 }
 
 function saveEditedEvent() {
