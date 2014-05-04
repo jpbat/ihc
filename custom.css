@@ -5,6 +5,11 @@ html, body {
 
 .outer-area {
     background: #ddd;
+    height: 70px;
+}
+.outer-area img {
+  display: block;
+  margin: auto;
 }
 
 #splash {
