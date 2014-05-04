@@ -241,7 +241,7 @@ function saveEvent() {
 }
 
 
-$('#search-resource').keypress(function(){
+$('#search-resource').keyup(function(){
 	//Remove all before list to avoid append
 	
 	$('#menu-resources-list ul').empty();
@@ -250,10 +250,12 @@ $('#search-resource').keypress(function(){
 	listResourcesInMenu(this.value);
 });
 
-$('#search-event').keypress(function(){
-	//Remove all before list to avoid append
-	$('#menu-events-list ul').empty();
-	listEventsInMenu(this.value);
+$('#search-event').on({
+
+	keyup: function(){
+		$('#menu-events-list ul').empty();
+		listEventsInMenu(this.value);
+	}
 });
 
 function listEventsInMenu(searchWord){
