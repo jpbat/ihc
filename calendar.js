@@ -12,45 +12,53 @@ $(document).ready(function() {
 
 	eventsList = [
 			{
-
+				id: nextEventId++,
 				title: 'All Day Event',
-				start: new Date(y, m, 1)
+				start: new Date(y, m, 1),
+				end: new Date(y, m, 2)
 			},
 			{
+				id: nextEventId++,
 				title: 'Long Event',
 				start: new Date(y, m, d-5),
 				end: new Date(y, m, d-2)
 			},
 			{
-				id: 5,
+				id: nextEventId++,
 				title: 'Repeating Event',
 				start: new Date(y, m, d-3, 16, 0),
+				end: new Date(y, m, d, 0),
 				allDay: false
 			},
 			{
-				id: 999,
+				id: nextEventId++,
 				title: 'Repeating Event',
 				start: new Date(y, m, d+4, 16, 0),
+				end: new Date(y, m, d+4,20,0),
 				allDay: false
 			},
 			{
+				id: nextEventId++,
 				title: 'Meeting',
 				start: new Date(y, m, d, 10, 30),
 				allDay: false
 			},
 			{
+				id: nextEventId++,
 				title: 'Lunch',
 				start: new Date(y, m, d, 12, 0),
 				end: new Date(y, m, d, 14, 0),
 				allDay: false
 			},
 			{
+				id: nextEventId++,
 				title: 'Birthday Party',
 				start: new Date(y, m, d+1, 19, 0),
 				end: new Date(y, m, d+1, 22, 30),
 				allDay: false
 			},
 			{
+				id: nextEventId++,
 				title: 'Click for Google',
 				start: new Date(y, m, 28),
 				end: new Date(y, m, 29),
@@ -234,6 +242,9 @@ function saveEvent() {
 
 	/* add event to global list */
 	eventsList.push(newEvent);
+
+	/* Add to Menu List */
+	createEvent(newEvent);
 
 	/* add the event to DOM and hide the modal */
 	$('#calendar').fullCalendar('renderEvent', newEvent);
