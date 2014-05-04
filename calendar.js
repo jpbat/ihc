@@ -1,3 +1,6 @@
+var eventsList = [];
+var resourcesList = [];
+
 $(document).ready(function() {
 
 	// page is now ready, initialize the calendar...
@@ -7,23 +10,9 @@ $(document).ready(function() {
 	var m = date.getMonth();
 	var y = date.getFullYear();
 
-	var eventsList = [];
-	var resourcesList = [
-		{ 
-			name:"Licinio Roque"
-		},
-		{
-			name: "Sala G.5.2" 
-		}];
-	
-	$('#calendar').fullCalendar({
-		// put your options and callbacks here
-
-		theme: true,
-		aspectRatio: 1.1,
-		editable: true,
-		events: [
+	eventsList = [
 			{
+
 				title: 'All Day Event',
 				start: new Date(y, m, 1)
 			},
@@ -67,7 +56,24 @@ $(document).ready(function() {
 				end: new Date(y, m, 29),
 				url: 'http://google.com/'
 			}
-		],
+		];
+	resourcesList = [
+		{ 
+			id: nextResourceId++,
+			name:"Licinio Roque"
+		},
+		{
+			id: nextResourceId++,
+			name: "Sala G.5.2" 
+		}];
+	
+	$('#calendar').fullCalendar({
+		// put your options and callbacks here
+
+		theme: true,
+		aspectRatio: 1.1,
+		editable: true,
+		events: eventsList, //add events to Calendar
 		eventClick: function(event) {
 			editEvent(event);
 		}
@@ -76,12 +82,19 @@ $(document).ready(function() {
 	$('#calendar').fullCalendar('changeView', 'agendaWeek' );
 
 	resourcesList.forEach(createResource);
+	//eventsList.forEach(createEvent)
+	listEventsInMenu();
+
 });
 
+function createEvent(elem) {
+	$("<li id=evt-'" + elem.id + "' class='event-item ui-draggable'>")
+		.text(elem.title).appendTo('#menu-events-list ul');
+}
+
 function createResource(elem) {
-	$('<li>', {
-		text: elem.name
-	}).appendTo('#menu-resources-list ul');
+	$("<li id=rsc-'" + elem.id + "' class='resource-item ui-draggable'>")
+		.text(elem.name).appendTo('#menu-resources-list ul');
 }
 
 function addEvent(name) {
@@ -141,7 +154,7 @@ $(function() {
 });
 
 $(function() {
-    $( "#menu-event-list li" ).draggable({
+    $( "#menu-events-list li" ).draggable({
       appendTo: "body",
       helper: "clone",
       cursor: "move",
@@ -220,13 +233,57 @@ function saveEvent() {
 	clearFields();
 
 	/* add event to global list */
-	events.push(newEvent);
+	eventsList.push(newEvent);
+
 	/* add the event to DOM and hide the modal */
 	$('#calendar').fullCalendar('renderEvent', newEvent);
 	$('#add-event-modal').modal('hide');
+}
 
 
+$('#search-resource').keypress(function(){
+	//Remove all before list to avoid append
+	
+	$('#menu-resources-list ul').empty();
 
+	//Append to menu list
+	listResourcesInMenu(this.value);
+});
+
+$('#search-event').keypress(function(){
+	//Remove all before list to avoid append
+	$('#menu-events-list ul').empty();
+	listEventsInMenu(this.value);
+});
+
+function listEventsInMenu(searchWord){
+	if(!searchWord){
+		eventsList.forEach(createEvent);
+	}
+	else
+	{
+	eventsList.forEach(function(elem){
+			if (elem.title.toLowerCase().indexOf(searchWord.toLowerCase()) > -1) 
+			{
+				createEvent(elem);
+			}
+		});
+	}	
+}
+
+function listResourcesInMenu(searchWord){
+	if(!searchWord){
+		resourcesList.forEach(createResource);
+	}
+	else
+	{
+	resourcesList.forEach(function(elem){
+			if (elem.name.toLowerCase().indexOf(searchWord.toLowerCase()) > -1) 
+			{
+				createResource(elem);
+			}
+		});
+	}	
 }
 
 function clearFields() {
