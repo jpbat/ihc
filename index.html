@@ -161,7 +161,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearFields()">Cancel</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearEventFields()">Cancel</button>
 							<button type="button" class="btn btn-primary" onclick="saveEvent()">Save Event</button>
 						</div>
 					</div><!-- /.modal-content -->
@@ -177,6 +177,8 @@
 							<h4 class="modal-title">New Resource</h4>
 						</div>
 						<div class="modal-body">
+							<div id="new-resource-errors" class="bs-example bs-example-bg-classes">
+							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="input-group">
@@ -265,7 +267,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearFields()">Cancel</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearEventsFields()">Cancel</button>
 						<button type="button" class="btn btn-primary" onclick="saveEditedEvent()">Save Event</button>
 					</div>
 				</div><!-- /.modal-content -->

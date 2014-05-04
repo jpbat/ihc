@@ -269,7 +269,7 @@ function saveResource() {
 
 	/* checking validity of stuff*/
 	if (name.length == 0) {
-		$("#new-resource-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
+		$("#new-resource-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a name to the resource.</div>");
 		console.log("Please add a name to the resource.")
 		return;
 	}
