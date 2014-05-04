@@ -185,7 +185,10 @@ function setDraggableEvents() {
 
 $(function() {
     setDraggableEvents();
-    $( "#new-event-incompatible-events" ).droppable({
+    $( "#new-event-incompatible-events" )
+    .dblclick(function(){
+ 		 console.log( "Hello World!" );
+	}).droppable({
       activeClass: "area-to-drag-event-element",
       hoverClass: "ui-state-hover ",
       accept: function(d) { 
@@ -417,3 +420,14 @@ $( "#menu-resources-list li" ).dblclick(function() {
   console.log( "Hello World!" );
 });
 */
+$("#menu-resources-list").on("dblclick","li",function(){
+	console.log("db click");
+});
+$("#menu-events-list").on("dblclick","li", function(){
+	var li = this;
+	
+	editEvent($.grep(eventsList, function(e){ 
+		console.log(e.id == li.id.replace("evt-",""));
+		return e.id == li.id.replace("evt-","");
+		})[0]
+	)});
