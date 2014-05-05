@@ -195,3 +195,9 @@ padding-right: 15px;
   opacity: 1;
   color: #000;
 }
+
+#events-overlayed {
+  position: absolute;
+  z-index: 5000;
+  left: 40%;
+}
