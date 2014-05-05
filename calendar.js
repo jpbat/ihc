@@ -492,10 +492,10 @@ function editEvent(ev) {
 
 	$("#edit-event-errors").empty();
 
-	$('#edit-event-modal').modal('show');
-	$('#edit-resource-modal').modal('hide');
 	$('#add-resource-modal').modal('hide');
 	$('#add-event-modal').modal('hide');
+	$('#edit-resource-modal').modal('hide');
+	$('#edit-event-modal').modal('show');
 }
 
 function editResource(ev) {
@@ -504,6 +504,10 @@ function editResource(ev) {
 	$('#edit-resource-name').val(ev.name);
 	$('#edit-resource-description').val(ev.description);
 	$('#resource-id').val(ev.id);
+
+	$('#add-resource-modal').modal('hide');
+	$('#add-event-modal').modal('hide');
+	$('#edit-event-modal').modal('hide');
 	$('#edit-resource-modal').modal('show');
 }
 
