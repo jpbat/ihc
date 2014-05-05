@@ -653,3 +653,38 @@ $(function() {
 	$(".panel-heading a[title]").tooltips();
 });
 
+function verifyIncompatibilities() {
+  	// to loop sequencially, not using enumeration (enumeration doesn't guarantee order)
+  	for (var i = 0; i < (eventsList.length - 1) ; i++) {
+    	//console.log(eventsList[i]);
+    	var e1 = eventsList[i];
+
+    	for (var j = i+1; j < eventsList.length ; j++) {
+    		var e2 = eventsList[j];
+    		
+    		if (!(e1.end <= e2.start || e1.start >= e2.end)) {
+    			// estao sobrepostos
+    			// testar recursos
+    			console.log(e1);
+    			console.log(e2);
+    			$.each(e1.resources, function(key,value) {
+    				console.log(value);
+					if ($.inArray( value, e2.resources ) > -1) {
+						// eventos incompativeis!!!
+						console.log("incompativeis");
+					};
+    			});
+    			// testar eventos incomp.
+    			$.each(e1.incompatibleEvents, function(key,value) {
+    				console.log(value);
+					if ($.inArray( value, e2.incompatibleEvents ) > -1) {
+						// eventos incompativeis!!!
+						console.log("incompativeis");
+					};
+    			});
+    		};
+    	};
+	};
+};
+
+

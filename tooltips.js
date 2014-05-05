@@ -3,7 +3,6 @@
 
   // Create plugin
   $.fn.tooltips = function(el) {
-    console.log("cenas");
 
     var $tooltip,
       $body = $('body'),
