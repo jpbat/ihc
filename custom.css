@@ -184,3 +184,14 @@ padding-right: 15px;
 .ui-droppable > span > span{
   white-space:normal;
 }*/
+
+.panel-heading span {
+  position: absolute;
+  opacity: 0.5;
+  right: 15px;
+  color: #444;
+}
+.panel-heading span:hover{
+  opacity: 1;
+  color: #000;
+}

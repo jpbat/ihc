@@ -645,4 +645,7 @@ function removeItem(elem) {
 	}
 }
 
+$(function() {
+	$(".panel-heading a[title]").tooltips();
+});
 

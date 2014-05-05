@@ -13,6 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="./bower_components/fullcalendar/fullcalendar.css" />
 		<link rel="stylesheet" type="text/css" href="./jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
 		<link rel="stylesheet" type="text/css" href="./custom.css" />
+		<link rel='stylesheet' type="text/css" href='./tooltips.css'>
 	</head>
 	<body>
 		<div id="splash" style="display: none">
@@ -29,7 +30,6 @@
 						<img border="0" src="logo.png" alt="TimeTight" width="250px">
 					</div>
 				</div>
-
 				<!-- Left menu element-->
 				<div class="row" id="calendar-row">
 					<div class="col-md-2">
@@ -142,7 +142,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="panel panel-default">
-										<div class="panel-heading">Resources</div>
+										<div class="panel-heading">
+											Resources
+											<a href="#" title="Events with common resources cannot be scheduled to the same time period!"><span class="btn-lg glyphicon glyphicon-info-sign"></span></a>
+										</div>
 										<div class="panel-body" id="new-event-resources">
 											<div class="placeholder">Drop resources here...</div>
 										</div>
@@ -152,7 +155,10 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="panel panel-default">
-										<div class="panel-heading">Incompatible Events</div>
+										<div class="panel-heading">
+											Incompatible Events
+											<a href="#" title="Incompatible events cannot be scheduled to the same time period!"><span class="btn-lg glyphicon glyphicon-info-sign"></span></a>
+										</div>
 										<div class="panel-body" id="new-event-incompatible-events">
 											<div class="placeholder">Drop incompatible events here...</div>
 										</div>
@@ -293,7 +299,10 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel panel-default">
-									<div class="panel-heading">Resources</div>
+									<div class="panel-heading">
+										Resources
+										<a href="#" title="Events with common resources cannot be scheduled to the same time period!"><span class="btn-lg glyphicon glyphicon-info-sign"></span></a>
+									</div>
 									<div class="panel-body" id="edit-event-resources">
 										<div class="placeholder">Drop resources here...</div>
 									</div>
@@ -303,7 +312,10 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel panel-default">
-									<div class="panel-heading">Incompatible Events</div>
+									<div class="panel-heading">
+										Incompatible Events
+										<a href="#" title="Incompatible events cannot be scheduled to the same time period!"><span class="btn-lg glyphicon glyphicon-info-sign"></span></a>
+									</div>
 									<div class="panel-body" id="edit-event-incompatible-events">
 										<div class="placeholder">Drop incompatible events here...</div>
 									</div>
@@ -327,9 +339,8 @@
 		<script type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="./bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 		<script type="text/javascript" src="./bower_components/fullcalendar/fullcalendar.js"></script>
+		<script type="text/javascript" src="./tooltips.js"></script>
 		<script type="text/javascript" src="./calendar.js"></script>
-
-
 
 	<!--
 		<script type="text/javascript">
