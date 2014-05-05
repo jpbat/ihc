@@ -11,7 +11,7 @@ $(document).ready(function() {
 	var d = date.getDate();
 	var m = date.getMonth();
 	var y = date.getFullYear();
-
+	/*
 	eventsList = [
 			{
 				id: nextEventId++,
@@ -98,6 +98,7 @@ $(document).ready(function() {
 			description: "Costuma cheirar a lasanha.",
 			name: "Sala G.5.2" 
 		}];
+	*/
 	
 	$('#calendar').fullCalendar({
 		// put your options and callbacks here
