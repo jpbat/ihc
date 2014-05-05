@@ -5,6 +5,8 @@ $(document).ready(function() {
 
 	// page is now ready, initialize the calendar...
 
+	$('#events-overlayed').css('top', $( window ).height()-150);
+
 	var date = new Date();
 	var d = date.getDate();
 	var m = date.getMonth();
@@ -653,3 +655,6 @@ $(function() {
 	$(".panel-heading a[title]").tooltips();
 });
 
+function addIncompatibleNotification(text) {
+	$('#events-overlayed').append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" + text + "</div>");
+}
