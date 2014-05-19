@@ -11,7 +11,7 @@ $(document).ready(function() {
 	var d = date.getDate();
 	var m = date.getMonth();
 	var y = date.getFullYear();
-	/*
+	
 	eventsList = [
 			{
 				id: nextEventId++,
@@ -98,7 +98,6 @@ $(document).ready(function() {
 			description: "Costuma cheirar a lasanha.",
 			name: "Sala G.5.2" 
 		}];
-	*/
 	
 	$('#calendar').fullCalendar({
 		// put your options and callbacks here
@@ -114,6 +113,14 @@ $(document).ready(function() {
 		events: eventsList, //add events to Calendar
 		eventClick: function(event) {
 			editEvent(event);
+		},
+		eventResizeStop:  function (event) {
+			console.log("event modified: " + event.title);
+			verifyIncompatibilities();
+		},
+		eventDragStop:  function (event) {
+			console.log("event modified: " + event.title);
+			verifyIncompatibilities();
 		}
 	})
 
@@ -168,115 +175,115 @@ $(function () {
 // Drag and drop
 function setDraggableResources() {
 	$( "#menu-resources-list li" ).draggable({
-      appendTo: "body",
-      helper: "clone",
-      cursor: "move",
-      start: function(e, ui) {
+	  appendTo: "body",
+	  helper: "clone",
+	  cursor: "move",
+	  start: function(e, ui) {
 		  $(ui.helper).addClass("dragging-resource-item");
 		 }
-    });
+	});
 }
 
 $(function() {
-    setDraggableResources();
-    $( "#new-event-resources" ).droppable({
-      activeClass: "area-to-drag-resource-element",
-      hoverClass: "ui-state-hover",
-      accept: function(d) { 
-	        if(d.hasClass("resource-item")){ 
-	            return true;
-	        }
-    	},
-      drop: function( event, ui ) {
-        $( this ).find( ".placeholder" ).remove();
-        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( '<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove" onclick="removeItem(this)"></span>' ).appendTo( this );
-      }
-    }).sortable({
-      items: "li:not(.placeholder)",
-      sort: function() {
-        // gets added unintentionally by droppable interacting with sortable
-        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
-        $( this ).removeClass( "ui-state-default" );
-      }
-    });
-    $( "#edit-event-resources" ).droppable({
-      activeClass: "area-to-drag-resource-element",
-      hoverClass: "ui-state-hover",
-      accept: function(d) { 
-	        if(d.hasClass("resource-item")){ 
-	            return true;
-	        }
-    	},
-      drop: function( event, ui ) {
-        $( this ).find( ".placeholder" ).remove();
-        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( '<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove" onclick="removeItem(this)"></span>' ).appendTo( this );
-      }
-    }).sortable({
-      items: "li:not(.placeholder)",
-      sort: function() {
-        // gets added unintentionally by droppable interacting with sortable
-        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
-        $( this ).removeClass( "ui-state-default" );
-      }
-    });
+	setDraggableResources();
+	$( "#new-event-resources" ).droppable({
+	  activeClass: "area-to-drag-resource-element",
+	  hoverClass: "ui-state-hover",
+	  accept: function(d) { 
+			if(d.hasClass("resource-item")){ 
+				return true;
+			}
+		},
+	  drop: function( event, ui ) {
+		$( this ).find( ".placeholder" ).remove();
+		$( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( '<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove" onclick="removeItem(this)"></span>' ).appendTo( this );
+	  }
+	}).sortable({
+	  items: "li:not(.placeholder)",
+	  sort: function() {
+		// gets added unintentionally by droppable interacting with sortable
+		// using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+		$( this ).removeClass( "ui-state-default" );
+	  }
+	});
+	$( "#edit-event-resources" ).droppable({
+	  activeClass: "area-to-drag-resource-element",
+	  hoverClass: "ui-state-hover",
+	  accept: function(d) { 
+			if(d.hasClass("resource-item")){ 
+				return true;
+			}
+		},
+	  drop: function( event, ui ) {
+		$( this ).find( ".placeholder" ).remove();
+		$( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-resource-item'></span>" ).text( ui.draggable.text() ).append( '<span class="object-item-remove-btn btn-xs glyphicon glyphicon-remove" onclick="removeItem(this)"></span>' ).appendTo( this );
+	  }
+	}).sortable({
+	  items: "li:not(.placeholder)",
+	  sort: function() {
+		// gets added unintentionally by droppable interacting with sortable
+		// using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+		$( this ).removeClass( "ui-state-default" );
+	  }
+	});
 });
 
 function setDraggableEvents() {
 	$( "#menu-events-list li" ).draggable({
-      appendTo: "body",
-      helper: "clone",
-      cursor: "move",
-      start: function(e, ui) {
+	  appendTo: "body",
+	  helper: "clone",
+	  cursor: "move",
+	  start: function(e, ui) {
 		  $(ui.helper).addClass("dragging-event-item");
 		 }
-    });
+	});
 }
 
 $(function() {
-    setDraggableEvents();
-    $( "#new-event-incompatible-events" )
-    .dblclick(function(){
- 		 console.log( "Hello World!" );
+	setDraggableEvents();
+	$( "#new-event-incompatible-events" )
+	.dblclick(function(){
+		 console.log( "Hello World!" );
 	}).droppable({
-      activeClass: "area-to-drag-event-element",
-      hoverClass: "ui-state-hover ",
-      accept: function(d) { 
-	        if(d.hasClass("event-item")){ 
-	            return true;
-	        }
-    	},
-      drop: function( event, ui ) {
-        $( this ).find( ".placeholder" ).remove();
-        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove' onclick='removeItem(this)'></span>" ).appendTo( this );
-      }
-    }).sortable({
-      items: "li:not(.placeholder)",
-      sort: function() {
-        // gets added unintentionally by droppable interacting with sortable
-        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
-        $( this ).removeClass( "ui-state-default" );
-      }
-    });
-    $( "#edit-event-incompatible-events" ).droppable({
-      activeClass: "area-to-drag-event-element",
-      hoverClass: "ui-state-hover ",
-      accept: function(d) { 
-	        if(d.hasClass("event-item")){ 
-	            return true;
-	        }
-    	},
-      drop: function( event, ui ) {
-        $( this ).find( ".placeholder" ).remove();
-        $( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove' onclick='removeItem(this)'></span>" ).appendTo( this );
-      }
-    }).sortable({
-      items: "li:not(.placeholder)",
-      sort: function() {
-        // gets added unintentionally by droppable interacting with sortable
-        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
-        $( this ).removeClass( "ui-state-default" );
-      }
-    });
+	  activeClass: "area-to-drag-event-element",
+	  hoverClass: "ui-state-hover ",
+	  accept: function(d) { 
+			if(d.hasClass("event-item")){ 
+				return true;
+			}
+		},
+	  drop: function( event, ui ) {
+		$( this ).find( ".placeholder" ).remove();
+		$( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove' onclick='removeItem(this)'></span>" ).appendTo( this );
+	  }
+	}).sortable({
+	  items: "li:not(.placeholder)",
+	  sort: function() {
+		// gets added unintentionally by droppable interacting with sortable
+		// using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+		$( this ).removeClass( "ui-state-default" );
+	  }
+	});
+	$( "#edit-event-incompatible-events" ).droppable({
+	  activeClass: "area-to-drag-event-element",
+	  hoverClass: "ui-state-hover ",
+	  accept: function(d) { 
+			if(d.hasClass("event-item")){ 
+				return true;
+			}
+		},
+	  drop: function( event, ui ) {
+		$( this ).find( ".placeholder" ).remove();
+		$( "<span id='" + $(ui.draggable).attr("id") + "' class='dragged-event-item'></span>" ).text( ui.draggable.text() ).append( "<span class='object-item-remove-btn btn-xs glyphicon glyphicon-remove' onclick='removeItem(this)'></span>" ).appendTo( this );
+	  }
+	}).sortable({
+	  items: "li:not(.placeholder)",
+	  sort: function() {
+		// gets added unintentionally by droppable interacting with sortable
+		// using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+		$( this ).removeClass( "ui-state-default" );
+	  }
+	});
 });
 
 function saveEvent() {
@@ -657,36 +664,40 @@ $(function() {
 });
 
 function verifyIncompatibilities() {
-  	// to loop sequencially, not using enumeration (enumeration doesn't guarantee order)
-  	for (var i = 0; i < (eventsList.length - 1) ; i++) {
-    	//console.log(eventsList[i]);
-    	var e1 = eventsList[i];
 
-    	for (var j = i+1; j < eventsList.length ; j++) {
-    		var e2 = eventsList[j];
-    		
-    		if (!(e1.end <= e2.start || e1.start >= e2.end)) {
-    			// estao sobrepostos
-    			// testar recursos
-    			console.log(e1);
-    			console.log(e2);
-    			$.each(e1.resources, function(key,value) {
-    				console.log(value);
-					if ($.inArray( value, e2.resources ) > -1) {
+	console.log("starting to verify incompatibilities");
+	var notified = false;
+
+	// to loop sequencially, not using enumeration (enumeration doesn't guarantee order)
+	for (var i = 0; i < (eventsList.length - 1) ; i++) {
+		//console.log(eventsList[i]);
+		var e1 = eventsList[i];
+
+		for (var j = i+1; j < eventsList.length ; j++) {
+			var e2 = eventsList[j];
+			
+			if (!(e1.end <= e2.start || e1.start >= e2.end)) {
+				// estao sobrepostos
+				// testar recursos
+				console.log(e1.title + " is overlaped with " + e2.title);
+				$.each(e1.resources, function(key,value) {
+					if ($.inArray( value, e2.resources ) > -1 && !notified) {
 						// eventos incompativeis!!!
-						console.log("incompativeis");
+						addIncompatibleNotification(e1.title + " and " + e2.title + " cannot occur simultaneously due to resources limitation.");
+						notified = true;
 					};
-    			});
-    			// testar eventos incomp.
-    			$.each(e1.incompatibleEvents, function(key,value) {
-    				console.log(value);
-					if ($.inArray( value, e2.incompatibleEvents ) > -1) {
+				});
+
+				// testar eventos incomp.
+				$.each(e1.incompatibleEvents, function(key,value) {
+					if ($.inArray( value, e2.incompatibleEvents ) > -1 && !notified) {
 						// eventos incompativeis!!!
-						console.log("incompativeis");
+						addIncompatibleNotification(e1.title + " and " + e2.title + " cannot occur simultaneously due to being incompatible.");
+						notified = true;
 					};
-    			});
-    		};
-    	};
+				});
+			};
+		};
 	};
 };
 
