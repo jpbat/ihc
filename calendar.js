@@ -356,6 +356,8 @@ function saveEvent() {
 	/* add the event to DOM and hide the modal */
 	$('#calendar').fullCalendar('renderEvent', newEvent);
 	$('#add-event-modal').modal('hide');
+
+	verifyIncompatibilities();
 }
 
 function saveResource() {
@@ -619,6 +621,7 @@ function saveEditedEvent() {
 
 	listEventsInMenu();
 	$('#edit-event-modal').modal('hide');
+	verifyIncompatibilities();
 }
 
 /* Double click Edit Stuff  */
@@ -702,5 +705,6 @@ function verifyIncompatibilities() {
 };
 
 function addIncompatibleNotification(text) {
+	$('#events-overlayed').empty()
 	$('#events-overlayed').append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" + text + "</div>");
 }
