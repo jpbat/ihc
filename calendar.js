@@ -295,27 +295,33 @@ function saveEvent() {
 	var name = $('#event-name').val();
 
 	/* checking validity of stuff*/
+	alert_div = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+	if (name.length == 0) {
+		message = "Please add a name to the event";
+
+		$("#new-event-errors").append(alert_div+message+"</div>");
+		console.log(message)
+		return;
+	}
+
 	if (start.length == 0) {
-		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
-		console.log("Please fill in start date.")
+		message = "Please fill the begin date field";
+		$("#new-event-errors").append(alert_div+message+"</div>");
+		console.log(message)
 		return;
 	}
 	
 	if (end.length == 0) {
-		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
-		console.log("Please fill in end date.")
+		message = "Please fill the end date field";
+		$("#new-event-errors").append(alert_div+message+"</div>");
+		console.log(message)
 		return;
 	}
 
 	if (new Date(start) > new Date(end)) {
-		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
-		console.log("start date should be before end date.")
-		return;
-	}
-
-	if (name.length == 0) {
-		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
-		console.log("Please add a title to the event.")
+		message = "Begin date should be before end date";
+		$("#new-event-errors").append(alert_div+message+"</div>");
+		console.log(message)
 		return;
 	}
 
@@ -372,8 +378,9 @@ function saveResource() {
 
 	/* checking validity of stuff*/
 	if (name.length == 0) {
-		$("#new-resource-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a name to the resource.</div>");
-		console.log("Please add a name to the resource.")
+		message = "Please add a name to the resource";
+		$("#new-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>"+message+"</div>");
+		console.log(message)
 		return;
 	}
 
@@ -457,9 +464,9 @@ function clearEventFields() {
 	$('#date-time-begin input').val("");
 	$('#date-time-end input').val("");
 	$('#new-event-resources').empty();
-	$('#new-event-resources').append('<div class="placeholder">Drop resources here...</div>');
+	$('#new-event-resources').append('<div class="placeholder">Drop resources here from the \'Resources\' menu</div>');
 	$('#new-event-incompatible-events').empty();
-	$('#new-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here...</div>');
+	$('#new-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here from the \'Events\' menu</div>');
 }
 
 function editEvent(ev) {
@@ -483,7 +490,7 @@ function editEvent(ev) {
 	}
 	else
 	{
-		$('#edit-event-resources').append('<div class="placeholder">Drop resources here...</div>');
+		$('#edit-event-resources').append('<div class="placeholder">Drop resources here from the \'Resources\' menu</div>');
 	}
 
 	$('#edit-event-incompatible-events').empty();
@@ -499,7 +506,7 @@ function editEvent(ev) {
 	}
 	else 
 	{
-		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here...</div>');
+		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here from the \'Events\' menu</div>');
 	}
 
 	$("#edit-event-errors").empty();
@@ -532,8 +539,9 @@ function saveEditedResource() {
 	console.log(name);
 	/* checking validity of stuff*/
 	if (name.length == 0) {
-		$("#edit-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a name to the resource.</div>");
-		console.log("error, no name")
+		message = "Please add a name to the resource";
+		$("#edit-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>"+message+"</div>");
+		console.log(message)
 		return;
 	}
 	/* save in global array */
@@ -569,26 +577,33 @@ function saveEditedEvent() {
 	var name = $('#edit-event-name').val();
 
 	/* checking validity of stuff*/
+	alert_div = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+	if (name.length == 0) {
+		message = "Please add a name to the event";
+
+		$("#edit-event-errors").append(alert_div+message+"</div>");
+		console.log(message)
+		return;
+	}
+
 	if (start.length == 0) {
-		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
-		console.log("Please fill in start date.")
+		message = "Please fill the begin date field";
+		$("#edit-event-errors").append(alert_div+message+"</div>");
+		console.log(message)
 		return;
 	}
 	
 	if (end.length == 0) {
-		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
-		console.log("Please fill in end date.")
+		message = "Please fill the end date field";
+		$("#edit-event-errors").append(alert_div+message+"</div>");
+		console.log(message)
 		return;
 	}
 
 	if (new Date(start) > new Date(end)) {
-		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
-		console.log("start date should be before end date.")
-		return;
-	}
-	if (name.length == 0) {
-		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
-		console.log("Please add a title to the event.")
+		message = "Begin date should be before end date";
+		$("#edit-event-errors").append(alert_div+message+"</div>");
+		console.log(message)
 		return;
 	}
 
@@ -653,11 +668,11 @@ function removeItem(elem) {
 	item.remove();
 	if ( $(itemArea).children().length == 0 ) {
 		if ( $(itemArea).attr('id') == 'new-event-resources' || $(itemArea).attr('id') == 'edit-event-resources' ) {
-			itemArea.append('<div class="placeholder">Drop resources here...</div>');
+			itemArea.append('<div class="placeholder">Drop resources here from the \'Resources\' menu</div>');
 		}
 		else
 		{
-			itemArea.append('<div class="placeholder">Drop incompatible events here...</div>');
+			itemArea.append('<div class="placeholder">Drop incompatible events here from the \'Events\' menu</div>');
 		}
 	}
 }
