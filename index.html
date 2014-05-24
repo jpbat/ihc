@@ -111,26 +111,27 @@
 							<div id="new-event-errors" class="bs-example bs-example-bg-classes">
 							</div>
 							<div class="input-group">
-								<span class="input-group-addon">Name</span>
-								<input id="event-name" type="text" class="form-control" placeholder="">
+								<span class="input-group-addon">Name*</span>
+								<input id="event-name" type="text" class="form-control" placeholder="Please insert an event name here">
 							</div>
 							<p>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
 										<div class='input-group date' id='date-time-begin'>
-											<span class="input-group-addon">Begin</span>
+											<span class="input-group-addon">Begin*</span>
 											<input type='text' class="form-control" />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span>
 											</span>
 										</div>
+
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<div class='input-group date' id='date-time-end'>
-											<span class="input-group-addon">End</span>
+											<span class="input-group-addon">End*</span>
 											<input type='text' class="form-control" />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span>
@@ -163,6 +164,7 @@
 											<div class="placeholder">Drop incompatible events here...</div>
 										</div>
 									</div>
+									<small><i>* - The fields are required</i></small>
 								</div>
 							</div>
 						</div>
@@ -188,8 +190,8 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="input-group">
-										<span class="input-group-addon">Name</span>
-										<input id="new-resource-name" type="text" class="form-control" placeholder="">
+										<span class="input-group-addon">Name*</span>
+										<input id="new-resource-name" type="text" class="form-control" placeholder="Please insert a resource name here">
 									</div>
 								</div>
 							</div>
@@ -200,8 +202,9 @@
 										<div class="panel-heading">
 											Description
 										</div>
-										<textarea id="new-resource-description" class="form-control" style="resize:none;" rows="4"></textarea>
+										<textarea id="new-resource-description" class="form-control" style="resize:none;" placeholder="Please insert a description here" rows="4"></textarea>
 									</div>
+									<small><i>* - The fields are required</i></small>
 								</div>
 							</div>
 						</div>
