@@ -800,10 +800,10 @@ function verifyIncompatibilities() {
 						incompatibilitiesCounter++;
 					};
 				});
-
 				// testar eventos incomp.
 				$.each(e1.incompatibleEvents, function(key,value) {
-					if ($.inArray( value, e2.incompatibleEvents ) > -1 && !notified) {
+						console.log(value);
+					if (value == e2.id && !notified) {
 						// eventos incompativeis!!!
 						addIncompatibleNotification(e1.title + " and " + e2.title + " cannot occur simultaneously due to being incompatible.");
 						notified = true;
