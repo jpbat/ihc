@@ -1,7 +1,38 @@
 var eventsList = [];
 var resourcesList = [];
 
+
+var should_highlight_shit = true;
+
 $(document).ready(function() {
+
+	$(".drop-resources-panel").hover(function () {
+			if (should_highlight_shit == true) {
+				$("#menu-resources-list").addClass("area-to-drag-resource");
+	        	$("#new-event-resources").addClass("area-to-drag-resource-element");
+	        	$("#edit-event-resources").addClass("area-to-drag-resource-element");	
+			};
+        }, function () {
+        	if (should_highlight_shit == true) {
+	        	$("#menu-resources-list").removeClass("area-to-drag-resource");
+	        	$("#new-event-resources").removeClass("area-to-drag-resource-element");
+	        	$("#edit-event-resources").removeClass("area-to-drag-resource-element");
+        	};
+    });
+	
+	$(".drop-events-panel").hover(function () {
+			if (should_highlight_shit == true) {
+	        	$("#menu-events-list").addClass("area-to-drag-event");
+	        	$("#new-event-incompatible-events").addClass("area-to-drag-event-element");
+	        	$("#edit-event-incompatible-events").addClass("area-to-drag-event-element");
+	        };
+        }, function () {
+        	if (should_highlight_shit == true) {
+	        	$("#menu-events-list").removeClass("area-to-drag-event");
+	        	$("#new-event-incompatible-events").removeClass("area-to-drag-event-element");
+	        	$("#edit-event-incompatible-events").removeClass("area-to-drag-event-element");
+	        };
+    });
 
 	// page is now ready, initialize the calendar...
 
@@ -180,7 +211,11 @@ function setDraggableResources() {
 	  cursor: "move",
 	  start: function(e, ui) {
 		  $(ui.helper).addClass("dragging-resource-item");
-		 }
+		  should_highlight_shit = false;
+		 }, 
+	  stop: function(e, ui) {
+	  	  should_highlight_shit = true;
+	  	 }
 	});
 }
 
@@ -188,7 +223,7 @@ $(function() {
 	setDraggableResources();
 	$( "#new-event-resources" ).droppable({
 	  activeClass: "area-to-drag-resource-element",
-	  hoverClass: "ui-state-hover",
+	  hoverClass: "",
 	  accept: function(d) { 
 			if(d.hasClass("resource-item")){ 
 				return true;
@@ -208,7 +243,7 @@ $(function() {
 	});
 	$( "#edit-event-resources" ).droppable({
 	  activeClass: "area-to-drag-resource-element",
-	  hoverClass: "ui-state-hover",
+	  hoverClass: "",
 	  accept: function(d) { 
 			if(d.hasClass("resource-item")){ 
 				return true;
@@ -235,7 +270,11 @@ function setDraggableEvents() {
 	  cursor: "move",
 	  start: function(e, ui) {
 		  $(ui.helper).addClass("dragging-event-item");
-		 }
+		  should_highlight_shit = false;
+		 },
+	  stop: function(e, ui) {
+	  	  should_highlight_shit = true;
+	  	 }
 	});
 }
 
@@ -246,7 +285,7 @@ $(function() {
 		 console.log( "Hello World!" );
 	}).droppable({
 	  activeClass: "area-to-drag-event-element",
-	  hoverClass: "ui-state-hover ",
+	  hoverClass: "",
 	  accept: function(d) { 
 			if(d.hasClass("event-item")){ 
 				return true;
@@ -266,7 +305,7 @@ $(function() {
 	});
 	$( "#edit-event-incompatible-events" ).droppable({
 	  activeClass: "area-to-drag-event-element",
-	  hoverClass: "ui-state-hover ",
+	  hoverClass: "",
 	  accept: function(d) { 
 			if(d.hasClass("event-item")){ 
 				return true;

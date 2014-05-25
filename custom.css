@@ -91,6 +91,13 @@ padding-right: 15px;
   color: #000;
 }
 
+.area-to-drag-event {
+  background: #BCD2DD;
+}
+.area-to-drag-resource {
+  background: #FECBA7;
+}
+
 .add-btn {
     padding-top: 13px;
 }
@@ -173,7 +180,6 @@ padding-right: 15px;
 }
 
 #menu-events-list, #menu-resources-list {
-  background: #fff;
   width: 206px;
 }
 /*
