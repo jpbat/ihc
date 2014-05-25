@@ -288,7 +288,7 @@ $(function() {
 });
 
 function saveEvent() {
-
+	removeNewEventErrorDisplays();
 	$("#new-event-errors").empty();
 
 	var start = $('#date-time-begin input').val();
@@ -296,27 +296,38 @@ function saveEvent() {
 	var name = $('#event-name').val();
 
 	/* checking validity of stuff*/
+	alert_div = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+	if (name.length == 0) {
+		message = "Please add a name to the event";
+		$("#new-event-errors").append(alert_div+message+"</div>");
+		$("#new-event-name").addClass("has-error");
+		console.log(message)
+		return;
+	}
+
 	if (start.length == 0) {
-		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
-		console.log("Please fill in start date.")
+		message = "Please fill the begin date field";
+		$("#new-event-errors").append(alert_div+message+"</div>");
+		$("#new-event-begin-date").addClass("has-error");
+		console.log(message)
 		return;
 	}
 	
 	if (end.length == 0) {
-		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
-		console.log("Please fill in end date.")
+		message = "Please fill the end date field";
+		$("#new-event-errors").append(alert_div+message+"</div>");
+		$("#new-event-end-date").addClass("has-error");
+		
+		console.log(message)
 		return;
 	}
 
 	if (new Date(start) > new Date(end)) {
-		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
-		console.log("start date should be before end date.")
-		return;
-	}
-
-	if (name.length == 0) {
-		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
-		console.log("Please add a title to the event.")
+		message = "Begin date should be before end date";
+		$("#new-event-errors").append(alert_div+message+"</div>");
+		$("#new-event-begin-date").addClass("has-error");
+		$("#new-event-end-date").addClass("has-error");
+		console.log(message)
 		return;
 	}
 
@@ -363,7 +374,9 @@ function saveEvent() {
 
 function saveResource() {
 
-	$("#new-resource-errors").empty();
+	removeNewResourceErrorDisplays();
+
+	$("#new-resources-errors").empty();
 
 	var description = $('#new-resource-description').val();
 	var name = $('#new-resource-name').val();
@@ -373,8 +386,10 @@ function saveResource() {
 
 	/* checking validity of stuff*/
 	if (name.length == 0) {
-		$("#new-resource-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a name to the resource.</div>");
-		console.log("Please add a name to the resource.")
+		message = "Please add a name to the resource";
+		$("#new-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>"+message+"</div>");
+		$("#new-resource-name-div").addClass("has-error");
+		console.log(message)
 		return;
 	}
 
@@ -447,12 +462,14 @@ function listResourcesInMenu(searchWord){
 	}	
 }
 function clearNewResourceFields() {
-	$("#new-event-errors").empty();
+	removeNewResourceErrorDisplays();
+	$("#new-resources-errors").empty();
 	$('#new-resource-description').val("");
 	$('#new-resource-name').val("");
 }
 
 function clearEventFields() {
+	removeNewEventErrorDisplays();
 	$('#new-event-errors').empty();
 	$('#event-name').val("");
 	$('#date-time-begin input').val("");
@@ -464,6 +481,9 @@ function clearEventFields() {
 }
 
 function editEvent(ev) {
+
+	removeEditEventErrorDisplays();
+
 	edited_event = ev;
 	$('#edit-event-title').html(ev.title);
 	$('#edit-event-name').val(ev.title);
@@ -512,11 +532,16 @@ function editEvent(ev) {
 }
 
 function editResource(ev) {
+
+	removeEditResourceErrorDisplays();
+
 	console.log(ev);
 	edited_resource = ev;
 	$('#edit-resource-name').val(ev.name);
 	$('#edit-resource-description').val(ev.description);
 	$('#resource-id').val(ev.id);
+
+	$("#edit-resources-errors").empty();
 
 	$('#add-resource-modal').modal('hide');
 	$('#add-event-modal').modal('hide');
@@ -526,6 +551,8 @@ function editResource(ev) {
 
 function saveEditedResource() {
 
+	removeEditResourceErrorDisplays();
+
 	$("#edit-resource-errors").empty();
 
 	var description = $('#edit-resource-description').val();
@@ -533,8 +560,10 @@ function saveEditedResource() {
 	console.log(name);
 	/* checking validity of stuff*/
 	if (name.length == 0) {
-		$("#edit-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a name to the resource.</div>");
-		console.log("error, no name")
+		message = "Please add a name to the resource";
+		$("#edit-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>"+message+"</div>");
+		$("#edit-resource-name-div").addClass("has-error");
+		console.log(message)
 		return;
 	}
 	/* save in global array */
@@ -555,6 +584,7 @@ function saveEditedResource() {
 
 //TODO DO THIS
 function clearEditedResourceFields(){
+	removeEditResourceErrorDisplays();
 	$('#edit-event-incompatible-events').empty();
 	$('#edit-event-resources').empty();
 	$('#new-event-resources').empty();
@@ -563,6 +593,8 @@ function clearEditedResourceFields(){
 
 function saveEditedEvent() {
 
+	removeEditEventErrorDisplays();
+
 	$("#edit-event-errors").empty();
 
 	var start = $('#edit-time-begin input').val();
@@ -570,26 +602,37 @@ function saveEditedEvent() {
 	var name = $('#edit-event-name').val();
 
 	/* checking validity of stuff*/
+	alert_div = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+	if (name.length == 0) {
+		message = "Please add a name to the event";
+		$("#edit-event-errors").append(alert_div+message+"</div>");
+		$("#edit-event-name-div").addClass("has-error");
+		console.log(message)
+		return;
+	}
+
 	if (start.length == 0) {
-		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
-		console.log("Please fill in start date.")
+		message = "Please fill the begin date field";
+		$("#edit-event-errors").append(alert_div+message+"</div>");
+		$("#edit-event-begin-date-div").addClass("has-error");
+		console.log(message)
 		return;
 	}
 	
 	if (end.length == 0) {
-		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
-		console.log("Please fill in end date.")
+		message = "Please fill the end date field";
+		$("#edit-event-errors").append(alert_div+message+"</div>");
+		$("#edit-event-end-date-div").addClass("has-error");
+		console.log(message)
 		return;
 	}
 
 	if (new Date(start) > new Date(end)) {
-		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
-		console.log("start date should be before end date.")
-		return;
-	}
-	if (name.length == 0) {
-		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
-		console.log("Please add a title to the event.")
+		message = "Begin date should be before end date";
+		$("#edit-event-errors").append(alert_div+message+"</div>");
+		$("#edit-event-begin-date-div").addClass("has-error");
+		$("#edit-event-end-date-div").addClass("has-error");
+		console.log(message)
 		return;
 	}
 
@@ -723,4 +766,24 @@ function changeincompatibilitiesBadge(incompatibilities_num){
 function addIncompatibleNotification(text) {
 	$('#events-overlayed').empty()
 	$('#events-overlayed').append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" + text + "</div>");
+}
+
+function removeNewEventErrorDisplays() {
+	$("#new-event-name").removeClass("has-error");
+	$("#new-event-begin-date").removeClass("has-error");
+	$("#new-event-end-date").removeClass("has-error");
+}
+
+function removeNewResourceErrorDisplays() {
+	$("#new-resource-name-div").removeClass("has-error");
+}
+
+function removeEditEventErrorDisplays() {
+	$("#edit-event-name-div").removeClass("has-error");
+	$("#edit-event-begin-date-div").removeClass("has-error");
+	$("#edit-event-end-date-div").removeClass("has-error");
+}
+
+function removeEditResourceErrorDisplays() {
+	$("#edit-resource-name-div").removeClass("has-error");
 }
