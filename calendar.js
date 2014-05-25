@@ -159,7 +159,7 @@ $(document).ready(function() {
 
 	resourcesList.forEach(createResource);
 	//eventsList.forEach(createEvent)
-	//changeincompatibilitiesBadge(10);
+	changeincompatibilitiesBadge(0);
 	listEventsInMenu();
 
 });
