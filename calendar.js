@@ -1,7 +1,6 @@
 var eventsList = [];
 var resourcesList = [];
 
-
 var should_highlight_shit = true;
 
 $(document).ready(function() {
@@ -163,9 +162,9 @@ $(document).ready(function() {
 		monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
 		axisFormat: 'HH:mm',
 		titleFormat: {
-			month: 'MMMM yyyy',                             // September 2009
-			week: "d MMMM [ yyyy]{ '&#8212;' d MMMM yyyy}", // Sep 7 - 13 2009
-			day: 'dddd, MMMM d, yyyy'                  // Tuesday, Sep 8, 2009
+			month: 'MMMM yyyy',
+			week: "d MMMM [ yyyy]{ '&#8212;' d MMMM yyyy}",
+			day: 'dddd, d MMMM yyyy'
 		}
 	})
 	$('#calendar').fullCalendar('changeView', 'agendaWeek' );
@@ -174,7 +173,8 @@ $(document).ready(function() {
 	//eventsList.forEach(createEvent)
 	changeincompatibilitiesBadge(0);
 	listEventsInMenu();
-
+	var now = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+	$('.needs_placeholder').attr("placeholder", now);
 });
 
 function createEvent(elem) {
@@ -210,10 +210,13 @@ function addResource(name) {
 }
 
 $(function () {
-	$('#date-time-begin').datetimepicker();
-	$('#date-time-end').datetimepicker();
-	$('#edit-time-begin').datetimepicker();
-	$('#edit-time-end').datetimepicker();
+	var options = {
+		format: 'D/MM/YYYY HH:mm'
+	}
+	$('#date-time-begin').datetimepicker(options);
+	$('#date-time-end').datetimepicker(options);
+	$('#edit-time-begin').datetimepicker(options);
+	$('#edit-time-end').datetimepicker(options);
 });
 
 // ######################################################################
@@ -373,6 +376,15 @@ function saveEvent() {
 		console.log(message)
 		return;
 	}
+
+	start = start.split('/')
+	start = start[1] + "/" + start[0] + "/" + start[2]
+	end = end.split('/')
+	end = end[1] + "/" + end[0] + "/" + end[2]
+	
+	console.log('start: ' + start);
+	console.log('end: ' + end);
+
 
 	if (new Date(start) > new Date(end)) {
 		message = "Begin date should be before end date";
@@ -779,7 +791,7 @@ function verifyIncompatibilities() {
 			if (!(e1.end <= e2.start || e1.start >= e2.end)) {
 				// estao sobrepostos
 				// testar recursos
-				console.log(e1.title + " is overlaped with " + e2.title);
+				// console.log(e1.title + " is overlaped with " + e2.title);
 				$.each(e1.resources, function(key,value) {
 					if ($.inArray( value, e2.resources ) > -1 && !notified) {
 						// eventos incompativeis!!!
