@@ -2,6 +2,30 @@ html, body {
     height:100%;
     background: #ddd;
 }
+.error-notification {
+  background-color: #FF0000;
+}
+
+#padding-me{
+  padding-top: 30px;
+  padding-left: 30px;
+}
+
+#logo {
+  height: 69px;
+  width: 306px;
+  
+}
+
+.color-background {
+  background-color: #ddd;
+  border-color: #ddd;
+}
+
+.items-list {
+  overflow: auto;
+  height: 700px;
+}
 
 .outer-area {
     background: #ddd;

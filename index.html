@@ -16,19 +16,28 @@
 		<link rel='stylesheet' type="text/css" href='./tooltips.css'>
 	</head>
 	<body>
-		<div id="splash" style="display: none">
-			<table id="wrapper">
-				<tr>
-					<td><img id="logo" src="./logo.png" alt="app logo"></td>
-				</tr>
-			</table>
-		</div>
+		<div class="navbar navbar-inverse navbar-fixed-top color-background" role="navigation">
+        	
+	        	<div class="row">
+	        		<div class="col-md-4 col-md-offset-2">
+	        			<img id="logo" src="./logo.png" alt="app logo">
+	    			</div>
+	    			<div class="col-md-4 col-md-offset-2">
+	    				<div id= "padding-me">
+	        				<span id ="incompatible-badge" class="badge">
+	        					
+	        				</span>
+	        			</div>
+	    			</div>
+	        	</div>
+   		
+      	</div>
+      
+ 
+		
 		<div id="content">
 			<div class="container-fluid">
 				<div class="row outer-area">
-					<div class="col-md-offset-2 col-md-8 ">
-						<img border="0" src="logo.png" alt="TimeTight" width="250px">
-					</div>
 				</div>
 				<!-- Left menu element-->
 				<div class="row" id="calendar-row">
@@ -54,7 +63,7 @@
 							</div>
 						
 							<div class="row menu-content" id="menu-events-list">
-								<div class="col-md-12">
+								<div class="col-md-12 items-list">
 									<ul>
 									</ul>
 								</div>
@@ -89,7 +98,7 @@
 								</div>
 							</div>
 							<div class="row menu-content" id="menu-resources-list">
-								<div class="col-md-12">
+								<div class="col-md-12 items-list">
 									<ul>
 									</ul>
 								</div>

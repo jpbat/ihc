@@ -159,6 +159,7 @@ $(document).ready(function() {
 
 	resourcesList.forEach(createResource);
 	//eventsList.forEach(createEvent)
+	//changeincompatibilitiesBadge(10);
 	listEventsInMenu();
 
 });
@@ -513,9 +514,9 @@ function clearEventFields() {
 	$('#date-time-begin input').val("");
 	$('#date-time-end input').val("");
 	$('#new-event-resources').empty();
-	$('#new-event-resources').append('<div class="placeholder">Drop resources here from the \'Resources\' menu</div>');
+	$('#new-event-resources').append('<div class="placeholder">Drop resources here...</div>');
 	$('#new-event-incompatible-events').empty();
-	$('#new-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here from the \'Events\' menu</div>');
+	$('#new-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here...</div>');
 }
 
 function editEvent(ev) {
@@ -542,7 +543,7 @@ function editEvent(ev) {
 	}
 	else
 	{
-		$('#edit-event-resources').append('<div class="placeholder">Drop resources here from the \'Resources\' menu</div>');
+		$('#edit-event-resources').append('<div class="placeholder">Drop resources here...</div>');
 	}
 
 	$('#edit-event-incompatible-events').empty();
@@ -558,7 +559,7 @@ function editEvent(ev) {
 	}
 	else 
 	{
-		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here from the \'Events\' menu</div>');
+		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here...</div>');
 	}
 
 	$("#edit-event-errors").empty();
@@ -735,11 +736,11 @@ function removeItem(elem) {
 	item.remove();
 	if ( $(itemArea).children().length == 0 ) {
 		if ( $(itemArea).attr('id') == 'new-event-resources' || $(itemArea).attr('id') == 'edit-event-resources' ) {
-			itemArea.append('<div class="placeholder">Drop resources here from the \'Resources\' menu</div>');
+			itemArea.append('<div class="placeholder">Drop resources here...</div>');
 		}
 		else
 		{
-			itemArea.append('<div class="placeholder">Drop incompatible events here from the \'Events\' menu</div>');
+			itemArea.append('<div class="placeholder">Drop incompatible events here...</div>');
 		}
 	}
 }
@@ -750,6 +751,7 @@ $(function() {
 
 function verifyIncompatibilities() {
 
+	var incompatibilitiesCounter = 0;
 	console.log("starting to verify incompatibilities");
 	var notified = false;
 
@@ -770,6 +772,7 @@ function verifyIncompatibilities() {
 						// eventos incompativeis!!!
 						addIncompatibleNotification(e1.title + " and " + e2.title + " cannot occur simultaneously due to resources limitation.");
 						notified = true;
+						incompatibilitiesCounter++;
 					};
 				});
 
@@ -779,12 +782,25 @@ function verifyIncompatibilities() {
 						// eventos incompativeis!!!
 						addIncompatibleNotification(e1.title + " and " + e2.title + " cannot occur simultaneously due to being incompatible.");
 						notified = true;
+						incompatibilitiesCounter++;
 					};
 				});
 			};
 		};
 	};
+	changeincompatibilitiesBadge(incompatibilitiesCounter);
 };
+
+function changeincompatibilitiesBadge(incompatibilities_num){
+
+	if(incompatibilities_num == 0){
+		$('#incompatible-badge').text("");
+	}
+	else{
+		$('#incompatible-badge').html("<span class='glyphicon glyphicon-warning-sign'> </span> Incompatibilities: " + incompatibilities_num);
+		$('#incompatible-badge').toggleClass("error-notification", incompatibilities_num > 0);
+	}
+}
 
 function addIncompatibleNotification(text) {
 	$('#events-overlayed').empty()
