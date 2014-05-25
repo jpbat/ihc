@@ -128,6 +128,7 @@ $(document).ready(function() {
 
 	resourcesList.forEach(createResource);
 	//eventsList.forEach(createEvent)
+	//changeincompatibilitiesBadge(10);
 	listEventsInMenu();
 
 });
@@ -295,33 +296,27 @@ function saveEvent() {
 	var name = $('#event-name').val();
 
 	/* checking validity of stuff*/
-	alert_div = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-	if (name.length == 0) {
-		message = "Please add a name to the event";
-
-		$("#new-event-errors").append(alert_div+message+"</div>");
-		console.log(message)
-		return;
-	}
-
 	if (start.length == 0) {
-		message = "Please fill the begin date field";
-		$("#new-event-errors").append(alert_div+message+"</div>");
-		console.log(message)
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
+		console.log("Please fill in start date.")
 		return;
 	}
 	
 	if (end.length == 0) {
-		message = "Please fill the end date field";
-		$("#new-event-errors").append(alert_div+message+"</div>");
-		console.log(message)
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
+		console.log("Please fill in end date.")
 		return;
 	}
 
 	if (new Date(start) > new Date(end)) {
-		message = "Begin date should be before end date";
-		$("#new-event-errors").append(alert_div+message+"</div>");
-		console.log(message)
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
+		console.log("start date should be before end date.")
+		return;
+	}
+
+	if (name.length == 0) {
+		$("#new-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
+		console.log("Please add a title to the event.")
 		return;
 	}
 
@@ -378,9 +373,8 @@ function saveResource() {
 
 	/* checking validity of stuff*/
 	if (name.length == 0) {
-		message = "Please add a name to the resource";
-		$("#new-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>"+message+"</div>");
-		console.log(message)
+		$("#new-resource-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a name to the resource.</div>");
+		console.log("Please add a name to the resource.")
 		return;
 	}
 
@@ -464,9 +458,9 @@ function clearEventFields() {
 	$('#date-time-begin input').val("");
 	$('#date-time-end input').val("");
 	$('#new-event-resources').empty();
-	$('#new-event-resources').append('<div class="placeholder">Drop resources here from the \'Resources\' menu</div>');
+	$('#new-event-resources').append('<div class="placeholder">Drop resources here...</div>');
 	$('#new-event-incompatible-events').empty();
-	$('#new-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here from the \'Events\' menu</div>');
+	$('#new-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here...</div>');
 }
 
 function editEvent(ev) {
@@ -490,7 +484,7 @@ function editEvent(ev) {
 	}
 	else
 	{
-		$('#edit-event-resources').append('<div class="placeholder">Drop resources here from the \'Resources\' menu</div>');
+		$('#edit-event-resources').append('<div class="placeholder">Drop resources here...</div>');
 	}
 
 	$('#edit-event-incompatible-events').empty();
@@ -506,7 +500,7 @@ function editEvent(ev) {
 	}
 	else 
 	{
-		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here from the \'Events\' menu</div>');
+		$('#edit-event-incompatible-events').append('<div class="placeholder">Drop incompatible events here...</div>');
 	}
 
 	$("#edit-event-errors").empty();
@@ -539,9 +533,8 @@ function saveEditedResource() {
 	console.log(name);
 	/* checking validity of stuff*/
 	if (name.length == 0) {
-		message = "Please add a name to the resource";
-		$("#edit-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>"+message+"</div>");
-		console.log(message)
+		$("#edit-resources-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a name to the resource.</div>");
+		console.log("error, no name")
 		return;
 	}
 	/* save in global array */
@@ -577,33 +570,26 @@ function saveEditedEvent() {
 	var name = $('#edit-event-name').val();
 
 	/* checking validity of stuff*/
-	alert_div = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-	if (name.length == 0) {
-		message = "Please add a name to the event";
-
-		$("#edit-event-errors").append(alert_div+message+"</div>");
-		console.log(message)
-		return;
-	}
-
 	if (start.length == 0) {
-		message = "Please fill the begin date field";
-		$("#edit-event-errors").append(alert_div+message+"</div>");
-		console.log(message)
+		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in start date.</div>");
+		console.log("Please fill in start date.")
 		return;
 	}
 	
 	if (end.length == 0) {
-		message = "Please fill the end date field";
-		$("#edit-event-errors").append(alert_div+message+"</div>");
-		console.log(message)
+		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please fill in end date.</div>");
+		console.log("Please fill in end date.")
 		return;
 	}
 
 	if (new Date(start) > new Date(end)) {
-		message = "Begin date should be before end date";
-		$("#edit-event-errors").append(alert_div+message+"</div>");
-		console.log(message)
+		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Start date should be before end date.</div>");
+		console.log("start date should be before end date.")
+		return;
+	}
+	if (name.length == 0) {
+		$("#edit-event-errors").append("<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Please add a title to the event.</div>");
+		console.log("Please add a title to the event.")
 		return;
 	}
 
@@ -668,11 +654,11 @@ function removeItem(elem) {
 	item.remove();
 	if ( $(itemArea).children().length == 0 ) {
 		if ( $(itemArea).attr('id') == 'new-event-resources' || $(itemArea).attr('id') == 'edit-event-resources' ) {
-			itemArea.append('<div class="placeholder">Drop resources here from the \'Resources\' menu</div>');
+			itemArea.append('<div class="placeholder">Drop resources here...</div>');
 		}
 		else
 		{
-			itemArea.append('<div class="placeholder">Drop incompatible events here from the \'Events\' menu</div>');
+			itemArea.append('<div class="placeholder">Drop incompatible events here...</div>');
 		}
 	}
 }
@@ -683,6 +669,7 @@ $(function() {
 
 function verifyIncompatibilities() {
 
+	var incompatibilitiesCounter = 0;
 	console.log("starting to verify incompatibilities");
 	var notified = false;
 
@@ -703,6 +690,7 @@ function verifyIncompatibilities() {
 						// eventos incompativeis!!!
 						addIncompatibleNotification(e1.title + " and " + e2.title + " cannot occur simultaneously due to resources limitation.");
 						notified = true;
+						incompatibilitiesCounter++;
 					};
 				});
 
@@ -712,12 +700,25 @@ function verifyIncompatibilities() {
 						// eventos incompativeis!!!
 						addIncompatibleNotification(e1.title + " and " + e2.title + " cannot occur simultaneously due to being incompatible.");
 						notified = true;
+						incompatibilitiesCounter++;
 					};
 				});
 			};
 		};
 	};
+	changeincompatibilitiesBadge(incompatibilitiesCounter);
 };
+
+function changeincompatibilitiesBadge(incompatibilities_num){
+
+	if(incompatibilities_num == 0){
+		$('#incompatible-badge').text("");
+	}
+	else{
+		$('#incompatible-badge').html("<span class='glyphicon glyphicon-warning-sign'> </span> Incompatibilities: " + incompatibilities_num);
+		$('#incompatible-badge').toggleClass("error-notification", incompatibilities_num > 0);
+	}
+}
 
 function addIncompatibleNotification(text) {
 	$('#events-overlayed').empty()
