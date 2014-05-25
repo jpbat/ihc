@@ -152,9 +152,17 @@ $(document).ready(function() {
 		eventDragStop:  function (event) {
 			console.log("event modified: " + event.title);
 			verifyIncompatibilities();
-		}
+		},
+		timeFormat: 'HH:mm',
+		columnFormat: {
+			day: 'dddd'
+		},
+		monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+		dayNames: ['Domingo','Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+		dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+		monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+		axisFormat: 'HH:mm'
 	})
-
 	$('#calendar').fullCalendar('changeView', 'agendaWeek' );
 
 	resourcesList.forEach(createResource);
