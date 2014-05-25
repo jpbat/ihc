@@ -161,7 +161,12 @@ $(document).ready(function() {
 		dayNames: ['Domingo','Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
 		dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
 		monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-		axisFormat: 'HH:mm'
+		axisFormat: 'HH:mm',
+		titleFormat: {
+			month: 'MMMM yyyy',                             // September 2009
+			week: "d MMMM [ yyyy]{ '&#8212;' d MMMM yyyy}", // Sep 7 - 13 2009
+			day: 'dddd, MMMM d, yyyy'                  // Tuesday, Sep 8, 2009
+		}
 	})
 	$('#calendar').fullCalendar('changeView', 'agendaWeek' );
 
