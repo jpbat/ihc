@@ -1,234 +1,238 @@
 html, body {
-    height:100%;
-    background: #ddd;
+	height:100%;
+	background: #ddd;
 }
 .error-notification {
-  background-color: #FF0000;
+	background-color: #FF0000;
 }
 
 #padding-me{
-  padding-top: 30px;
-  padding-left: 30px;
+	padding-top: 30px;
+	padding-left: 30px;
 }
 
 #logo {
-  height: 69px;
-  width: 306px;
-  
+	height: 69px;
+	width: 306px;
+	
 }
 
 .color-background {
-  background-color: #ddd;
-  border-color: #ddd;
+	background-color: #ddd;
+	border-color: #ddd;
+}
+
+.items-list:hover {
+	cursor: all-scroll;
 }
 
 .items-list {
-  overflow: auto;
-  height: 700px;
+	overflow: auto;
+	height: 700px;
 }
 
 .outer-area {
-    background: #ddd;
-    height: 70px;
+	background: #ddd;
+	height: 70px;
 }
 .outer-area img {
-  display: block;
-  margin: auto;
+	display: block;
+	margin: auto;
 }
 
 #splash {
-    height: 100%;
-    background: black;
+	height: 100%;
+	background: black;
 }
 
 #wrapper {
-   height:100%;
-   width: 100%;
-   margin: 0;
-   padding: 0;
-   border: 0;
+	height:100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
 #wrapper td {
-   vertical-align: middle;
-   text-align: center;
+	vertical-align: middle;
+	text-align: center;
 }
 
 #content {
-  background: #ddd;
+	background: #ddd;
 }
 
 #right-menu, #left-menu {
-    overflow: visible;
-    position: absolute;
-    z-index: 9000;
+	overflow: visible;
+	position: absolute;
+	z-index: 9000;
 }
 
 .menu-header {
-    background: #bcbcbc;
-    position: absolute;
-    top: -70px;
-    width: 206px;
-    left: -15px;
+	background: #bcbcbc;
+	position: absolute;
+	top: -70px;
+	width: 206px;
+	left: -15px;
 }
 .menu-header-item {
 padding-left: 15px;
 padding-right: 15px;
 }
 .menu-content {
-    background: #fff;
-    margin-top: 24px;
-    min-height: 500px;
-    -moz-border-radius-bottomright: 10px;
-    -moz-border-radius-bottomleft: 10px;
-    -webkit-border-bottom-right-radius: 10px;
-    -webkit-border-bottom-left-radius: 10px;
-    border-style:solid;
-    border-width:2px;
-    border-color:#bcbcbc;
+	background: #fff;
+	margin-top: 24px;
+	min-height: 500px;
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	border-style:solid;
+	border-width:2px;
+	border-color:#bcbcbc;
 }
 .menu-content ul {
-  list-style-type: none;
-  padding-left: 0;
+	list-style-type: none;
+	padding-left: 0;
 }
 
 #right-menu > .menu-content li:hover {
-  background: #FECBA7;
-  cursor: pointer;
+	background: #FECBA7;
+	cursor: pointer;
 }
 #left-menu > .menu-content li:hover {
-  background: #BCD2DD;
-  cursor: pointer;
+	background: #BCD2DD;
+	cursor: pointer;
 }
 .area-to-drag-event-element {
-  background: #77A4BB;
-  opacity:0.5;
+	background: #77A4BB;
+	opacity:0.5;
 }
 .area-to-drag-event-element .placeholder{
-  color: #000;
+	color: #000;
 }
 .area-to-drag-resource-element {
-  background: #FF964E;
-  opacity:0.5;
+	background: #FF964E;
+	opacity:0.5;
 }
 .area-to-drag-resource-element .placeholder{
-  color: #000;
+	color: #000;
 }
 
 .area-to-drag-event {
-  background: #BCD2DD;
+	background: #BCD2DD;
 }
 .area-to-drag-resource {
-  background: #FECBA7;
+	background: #FECBA7;
 }
 
 .add-btn {
-    padding-top: 13px;
+	padding-top: 13px;
 }
 
 #menu-search {
-    padding-bottom: 8px;
+	padding-bottom: 8px;
 }
 
 .placeholder {
-    color: #aaa;
-    font-style: italic;
+	color: #aaa;
+	font-style: italic;
 }
 
 .dragging-event-item {
-  background: #3a87ad;
-  color: #fff;
-  border:2px solid;
-  border-radius:25px;
-  border-color:#3a87ad #3a87ad;
-  padding: 0px 5px 0px 5px;
-  list-style-type: none;
-  position: absolute;
-  z-index: 9999;
+	background: #3a87ad;
+	color: #fff;
+	border:2px solid;
+	border-radius:25px;
+	border-color:#3a87ad #3a87ad;
+	padding: 0px 5px 0px 5px;
+	list-style-type: none;
+	position: absolute;
+	z-index: 9999;
 }
 .dragged-event-item {
-  background: #3a87ad;
-  color: #fff;
-  border:2px solid;
-  border-radius:25px;
-  border-color:#3a87ad #3a87ad;
-  padding: 0px 5px 0px 5px;
-  list-style-type: none;
+	background: #3a87ad;
+	color: #fff;
+	border:2px solid;
+	border-radius:25px;
+	border-color:#3a87ad #3a87ad;
+	padding: 0px 5px 0px 5px;
+	list-style-type: none;
 }
 
 .dragged-event-item:hover {
-  padding: 0px 0px 0px 5px;
+	padding: 0px 0px 0px 5px;
 }
 
 .dragged-event-item:hover > span {
-  display: inline;
+	display: inline;
 }
 .dragging-resource-item {
-  background: #ff6902;
-  color: #fff;
-  border:2px solid;
-  border-radius:25px;
-  border-color:#ff6902 #ff6902;
-  padding: 0px 5px 0px 5px;
-  list-style-type: none;
-  position: absolute;
-  z-index: 9999;
+	background: #ff6902;
+	color: #fff;
+	border:2px solid;
+	border-radius:25px;
+	border-color:#ff6902 #ff6902;
+	padding: 0px 5px 0px 5px;
+	list-style-type: none;
+	position: absolute;
+	z-index: 9999;
 }
 .dragged-resource-item {
-  background: #ff6902;
-  color: #fff;
-  border:2px solid;
-  border-radius:25px;
-  border-color:#ff6902 #ff6902;
-  padding: 0px 5px 0px 5px;
-  list-style-type: none;
+	background: #ff6902;
+	color: #fff;
+	border:2px solid;
+	border-radius:25px;
+	border-color:#ff6902 #ff6902;
+	padding: 0px 5px 0px 5px;
+	list-style-type: none;
 }
 
 .dragged-resource-item:hover {
-  padding: 0px 0px 0px 5px;
+	padding: 0px 0px 0px 5px;
 }
 
 .dragged-resource-item:hover > span {
-  display: inline;
+	display: inline;
 }
 
 .object-item-remove-btn {
-  display: none;
-  margin: 0px -5px 0px -5px;
+	display: none;
+	margin: 0px -5px 0px -5px;
 }
 
 .object-item-remove-btn:hover {
-  display: none;
-  margin: 0px -5px 0px -5px;
-  color: #ccc;
+	display: none;
+	margin: 0px -5px 0px -5px;
+	color: #ccc;
 }
 
 #menu-events-list, #menu-resources-list {
-  width: 206px;
+	width: 206px;
 }
 /*
 .ui-droppable > span {
-  white-space:nowrap;
+	white-space:nowrap;
 }
 
 .ui-droppable > span > span{
-  white-space:normal;
+	white-space:normal;
 }*/
 
 .panel-heading span {
-  position: absolute;
-  opacity: 0.5;
-  right: 15px;
-  color: #444;
+	position: absolute;
+	opacity: 0.5;
+	right: 15px;
+	color: #444;
 }
 .panel-heading span:hover{
-  opacity: 1;
-  color: #000;
+	opacity: 1;
+	color: #000;
 }
 
 #events-overlayed {
-  position: absolute;
-  z-index: 5000;
-  left: 27.5%;
-  bottom: 10px;
+	position: absolute;
+	z-index: 5000;
+	left: 27.5%;
+	bottom: 10px;
 }
