@@ -110,14 +110,17 @@
 						<div class="modal-body">
 							<div id="new-event-errors" class="bs-example bs-example-bg-classes">
 							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Name*</span>
-								<input id="event-name" type="text" class="form-control" placeholder="Please insert an event name here">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group input-group" id="new-event-name">
+										<span class="input-group-addon">Name*</span>
+										<input id="event-name" type="text" class="form-control" placeholder="Please insert an event name here">
+									</div>
+								</div>
 							</div>
-							<p>
 							<div class="row">
 								<div class="col-md-6">
-									<div class="form-group">
+									<div class="form-group" id="new-event-begin-date">
 										<div class='input-group date' id='date-time-begin'>
 											<span class="input-group-addon">Begin*</span>
 											<input type='text' class="form-control" />
@@ -129,7 +132,7 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="form-group">
+									<div class="form-group" id="new-event-end-date">
 										<div class='input-group date' id='date-time-end'>
 											<span class="input-group-addon">End*</span>
 											<input type='text' class="form-control" />
@@ -189,7 +192,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<div class="input-group">
+									<div class="input-group" id="new-resource-name-div">
 										<span class="input-group-addon">Name*</span>
 										<input id="new-resource-name" type="text" class="form-control" placeholder="Please insert a resource name here">
 									</div>
@@ -230,7 +233,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="input-group">
+								<div class="input-group" id="edit-resource-name-div">
 									<span class="input-group-addon">Name</span>
 									<input id="edit-resource-name" type="text" class="form-control" placeholder="">
 								</div>
@@ -268,7 +271,7 @@
 					<div class="modal-body">
 						<div id="edit-event-errors" class="bs-example bs-example-bg-classes">
 						</div>
-						<div class="input-group">
+						<div class="input-group" id="edit-event-name-div">
 							<span class="input-group-addon">Name</span>
 							<input id="edit-event-name" type="text" class="form-control" placeholder="">
 						</div>
@@ -277,7 +280,7 @@
 						<p>
 						<div class="row">
 							<div class="col-md-6">
-								<div class="form-group">
+								<div class="form-group" id="edit-event-begin-date-div">
 									<div class='input-group date' id='edit-time-begin'>
 										<span class="input-group-addon">Begin</span>
 										<input id="edit-event-start" type='text' class="form-control" />
@@ -288,7 +291,7 @@
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div class="form-group">
+								<div class="form-group" id="edit-event-end-date-div">
 									<div class='input-group date' id='edit-time-end'>
 										<span class="input-group-addon">End</span>
 										<input id="edit-event-end" type='text' class="form-control" />
