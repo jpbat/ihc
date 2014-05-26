@@ -42,7 +42,7 @@ $(document).ready(function() {
 	var m = date.getMonth();
 	var y = date.getFullYear();
 	
-	eventsList = [
+	eventsList = [/*
 			{
 				id: nextEventId++,
 				title: 'All Day Event',
@@ -115,9 +115,9 @@ $(document).ready(function() {
 				allDay: true,
 				resources: [],
 				incompatibleEvents: []
-			}
+			}*/
 		];
-	resourcesList = [
+	resourcesList = [/*
 		{ 
 			id: nextResourceId++,
 			description: "Professor de IHC/EDJ",
@@ -125,15 +125,15 @@ $(document).ready(function() {
 		},
 		{
 			id: nextResourceId++,
-			description: "Costuma cheirar a lasanha.",
+			description: "30m x 40m",
 			name: "Sala G.5.2" 
-		}];
+		}*/];
 	
 	$('#calendar').fullCalendar({
 		// put your options and callbacks here
 
 		theme: true,
-		aspectRatio: 1.1,
+		aspectRatio: 1.5,
 		editable: true,
 		header: {
 				left: 'prev,today,next',
